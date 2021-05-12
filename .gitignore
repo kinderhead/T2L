@@ -1,0 +1,8 @@
+# Project exclude paths
+/.gradle/
+/build/
+/t2lc/build/
+/t2lc/build/classes/java/main/
+/t2lc/build/classes/java/test/
+/TVM/build/
+/TVM/build/classes/java/main/

@@ -1,0 +1,3 @@
+func test "Arg" {
+    print(Arg);
+}

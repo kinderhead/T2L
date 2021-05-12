@@ -1,0 +1,3 @@
+rootProject.name = 'T2L'
+include 'TVM'
+include 't2lc'

@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+apply plugin: 'antlr'
+
+group 'io.github.kinderhead'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    antlr 'org.antlr:antlr4:4.9.2'
+    implementation project(':TVM')
+    compile 'commons-cli:commons-cli:1.4'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.8.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.register('buildLib', JavaExec) {
+    dependsOn(build)
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'io.github.kinderhead.T2L.t2lc.Main'
+    //args 'eeeee'
+    args '-d', '-m', '-o', '../src/dist/stdlib/', '-i', '../src/main/t2l/'
+}
+
+assembleDist.dependsOn('buildLib')
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'io.github.kinderhead.T2L.t2lc.Main'
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+application {
+    mainClassName = 'io.github.kinderhead.T2L.t2lc.Main'
+}
