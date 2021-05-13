@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/wiki" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/wiki/T2L-Java.wiki" vcs="Git" />
   </component>
 </project>
