@@ -6,3 +6,8 @@
 /t2lc/build/classes/java/test/
 /TVM/build/
 /TVM/build/classes/java/main/
+
+# T2L compiled files
+*.t2lc
+*.t2lm
+*.t2ll

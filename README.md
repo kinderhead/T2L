@@ -1,7 +1,8 @@
 # Installing
 First download and open with intellij.
 Then compile and run the `buildLib` gradle task.
-Next move the `TVM` and `t2lc` jars from their individual `build/libs` folders
+Next move the `TVM` and `t2lc` jars from their individual
+`build/distributions` folders
 in each submodule. Make sure the dependencies are either on classpath or
 in the same folder as the jars.
 
