@@ -4,9 +4,9 @@ import io.github.kinderhead.T2L.tvm.Main;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.security.Permission;
 
 class MainTest {
-
     /*
     @Test
     @DisplayName("Compile var and reference")
@@ -30,6 +30,23 @@ class MainTest {
 
     @Test
     void runFile() throws IOException {
+        System.setSecurityManager(new SecurityManager() {
+
+            @Override
+            public void checkPermission(Permission perm)
+            {
+            }
+
+            @Override
+            public void checkExit(int status)
+            {
+                if (status != 0) {
+                    throw new SecurityException();
+                }
+            }
+
+        });
+
         io.github.kinderhead.T2L.t2lc.Main.main(new String[]{"-i", "../src/test/t2l/test.t2l", "-o", "../src/dist/stdlib/test.t2lc"});
         /*
         Main.main(new String[]{"-o", "../lib/core.t2lm", "../lib/core.t2l"});
