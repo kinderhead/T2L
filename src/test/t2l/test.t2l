@@ -1,2 +1,3 @@
 import core;
-test("Hi");
+
+core.test("Hi");

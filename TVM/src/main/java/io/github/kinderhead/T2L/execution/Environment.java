@@ -175,9 +175,14 @@ public class Environment {
         }
 
         Executor new_executor = new Executor(executor.ENVIRONMENT);
-        new_executor.CURRENT_ENVIRONMENT = executor.CURRENT_ENVIRONMENT;
+        new_executor.CURRENT_ENVIRONMENT = newEnvironment(executor.CURRENT_ENVIRONMENT);
         new_executor.CODE = new Reader(new ArrayList<>(Arrays.asList(ArrayUtils.toObject(data)))).read();
         new_executor.execute();
+
+        String mod_name = new File(name).getName();
+        T2LClass module = new T2LClass(ENVIRONMENTS.get(new_executor.CURRENT_ENVIRONMENT));
+        T2LClassObj obj = module.instantiate(new ArrayList<>(), mod_name, -1);
+        set(executor.CURRENT_ENVIRONMENT, mod_name, obj, executor);
         // ee
         return true;
     }
