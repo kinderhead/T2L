@@ -1,5 +1,6 @@
 package io.github.kinderhead.T2L.execution;
 
+import io.github.kinderhead.T2L.execution.builtins.T2LAsObject;
 import io.github.kinderhead.T2L.execution.builtins.T2LFunction;
 import io.github.kinderhead.T2L.execution.builtins.T2LIterable;
 import io.github.kinderhead.T2L.execution.errors.AccessDeniedException;
@@ -97,6 +98,8 @@ public class JavaInterface extends T2LObject {
             return obj.getByte(executor);
         } else if (cls.isAssignableFrom(String.class)) {
             return obj.getVString(executor);
+        } else if (obj instanceof JavaInterface) {
+            return ((JavaInterface) obj).VALUE;
         } else if (cls.isAssignableFrom(T2LObject.class)) {
             return obj;
         } else {
@@ -149,6 +152,22 @@ public class JavaInterface extends T2LObject {
         return ret;
     }
 
+    public Object ifArrayChangeType(Class cls, Object obj, Executor executor) {
+        if (!cls.isArray()) {
+            return obj;
+        }
+
+        ArrayList<Object> out = new ArrayList<>();
+        for (Object i : ((Object[]) obj)) {
+            if (i instanceof T2LObject) {
+                out.add(getSupposedValue(((T2LObject) i), cls.getComponentType(), executor));
+            } else {
+                out.add(cls.getComponentType().cast(obj));
+            }
+        }
+        return Arrays.copyOf(out.toArray(), out.size(), cls);
+    }
+
     @Override
     public T2LObject rawGet(String name) {
         return getT2LObject(name);
@@ -181,7 +200,9 @@ public class JavaInterface extends T2LObject {
         if (VALUE instanceof Method) {
             try {
                 Method method = (Method) VALUE;
+                Class[] method_params = method.getParameterTypes();
                 boolean annotation = method.isAnnotationPresent(T2LFunction.class);
+                boolean isAsObject = method.isAnnotationPresent(T2LAsObject.class);
                 ArrayList<Object> param = new ArrayList<>();
 
                 int idex = 0;
@@ -191,7 +212,12 @@ public class JavaInterface extends T2LObject {
                 }
                 for (T2LObject i : params) {
                     Class cls = method.getParameterTypes()[offset];
-                    param.add(getSupposedValue(i, cls, executor));
+
+                    if (isAsObject && method_params[idex + offset].isAssignableFrom(T2LObject.class)) {
+                        param.add(i);
+                    } else {
+                        param.add(ifArrayChangeType(method_params[idex + offset], getSupposedValue(i, cls, executor), executor));
+                    }
                     idex++;
                     offset++;
                 }

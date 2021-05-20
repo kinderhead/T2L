@@ -3,6 +3,7 @@ package io.github.kinderhead.T2L.execution;
 import io.github.kinderhead.T2L.execution.builtins.Bool;
 import io.github.kinderhead.T2L.execution.builtins.Import;
 import io.github.kinderhead.T2L.execution.builtins.Print;
+import io.github.kinderhead.T2L.execution.builtins.modules.JavaModule;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -22,7 +23,9 @@ public class Environment {
     public Map<Integer, LocalEnvironment> ENVIRONMENTS = new HashMap<>();
     private int env_num = 0;
     private Stack<T2LObject> STACK = new Stack<>();
+    private ArrayList<T2LModule> JAVA_MODULES = new ArrayList<>();
     public ArrayList<String> SEARCH_PATHS = new ArrayList<>();
+    public Map<String, T2LObject> MODULES = new HashMap<>();
 
     public Environment() {
         try {
@@ -31,6 +34,11 @@ public class Environment {
             e.printStackTrace();
         }
         ENVIRONMENTS.put(0, new LocalEnvironment());
+        registerModule(new JavaModule());
+    }
+
+    public void registerModule(T2LModule module) {
+        JAVA_MODULES.add(module);
     }
 
     public void populateBase(Executor executor) {
@@ -146,6 +154,23 @@ public class Environment {
     public boolean importFile(String name, Executor executor, boolean err) {
         name = name.replace(".", "/");
         File file = new File(name + ".t2lm");
+        String mod_name = new File(name).getName();
+
+        if (err) {
+            for (Map.Entry<String, T2LObject> entry : MODULES.entrySet()) {
+                if (entry.getKey().equals(mod_name)) {
+                    set(executor.CURRENT_ENVIRONMENT, mod_name, entry.getValue(), executor);
+                    return true;
+                }
+            }
+
+            for (T2LModule mod : JAVA_MODULES) {
+                if (mod.getName().equals(mod_name)) {
+                    set(executor.CURRENT_ENVIRONMENT, mod_name, new JavaInterface(mod, null), executor);
+                    return true;
+                }
+            }
+        }
 
         byte[] data;
         if (file.exists()) {
@@ -179,10 +204,10 @@ public class Environment {
         new_executor.CODE = new Reader(new ArrayList<>(Arrays.asList(ArrayUtils.toObject(data)))).read();
         new_executor.execute();
 
-        String mod_name = new File(name).getName();
         T2LClass module = new T2LClass(ENVIRONMENTS.get(new_executor.CURRENT_ENVIRONMENT));
         T2LClassObj obj = module.instantiate(new ArrayList<>(), mod_name, -1);
         set(executor.CURRENT_ENVIRONMENT, mod_name, obj, executor);
+        MODULES.put(mod_name, obj);
         // ee
         return true;
     }
