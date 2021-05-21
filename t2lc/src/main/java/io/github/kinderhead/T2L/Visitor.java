@@ -28,7 +28,6 @@ import io.github.kinderhead.T2L.ast.VarStatement;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -124,7 +123,10 @@ public class Visitor extends t2lBaseVisitor<IVisitorAST> {
 
     @Override
     public IVisitorAST visitVar(t2lParser.VarContext ctx) {
-        return new VarStatement(ctx.getStart().getLine(), new ID(ctx.ID().getSymbol().getLine(), ctx.ID().getText()), visit(ctx.expr()));
+        if (ctx.expr() != null) {
+            return new VarStatement(ctx.getStart().getLine(), new ID(ctx.ID().getSymbol().getLine(), ctx.ID().getText()), visit(ctx.expr()));
+        }
+        return new VarStatement(ctx.getStart().getLine(), new ID(ctx.ID().getSymbol().getLine(), ctx.ID().getText()), new ID(ctx.getStart().getLine(), "null"));
     }
 
     @Override
@@ -134,7 +136,7 @@ public class Visitor extends t2lBaseVisitor<IVisitorAST> {
 
     @Override
     public IVisitorAST visitIndexOp(t2lParser.IndexOpContext ctx) {
-        return new FunctionCallStat(ctx.getStart().getLine(), new ID(ctx.ID().getSymbol().getLine(), ctx.ID().getText() + ".__get"), new ArrayList<>(Arrays.asList(visit(ctx.expr()))), true);
+        return new FunctionCallStat(ctx.getStart().getLine(), new ID(ctx.ID().getSymbol().getLine(), ctx.ID().getText() + ".__get"), new ArrayList<>(Collections.singletonList(visit(ctx.expr()))), true);
     }
 
     @Override
@@ -206,52 +208,23 @@ public class Visitor extends t2lBaseVisitor<IVisitorAST> {
         ExprCodes op;
         String text = ctx.op.getText();
 
-        switch (text) {
-            case ("=="):
-                op = ExprCodes.EQ;
-                break;
-            case ("!="):
-                op = ExprCodes.NEQ;
-                break;
-            case ("&&"):
-                op = ExprCodes.AND;
-                break;
-            case ("||"):
-                op = ExprCodes.OR;
-                break;
-            case (">"):
-                op = ExprCodes.GT;
-                break;
-            case ("<"):
-                op = ExprCodes.LT;
-                break;
-            case (">="):
-                op = ExprCodes.GTEQ;
-                break;
-            case ("<="):
-                op = ExprCodes.LTEQ;
-                break;
-            case ("+"):
-                op = ExprCodes.ADD;
-                break;
-            case ("-"):
-                op = ExprCodes.SUB;
-                break;
-            case ("*"):
-                op = ExprCodes.MUL;
-                break;
-            case ("/"):
-                op = ExprCodes.DIV;
-                break;
-            case ("%"):
-                op = ExprCodes.MOD;
-                break;
-            case ("^"):
-                op = ExprCodes.POW;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + text);
-        }
+        op = switch (text) {
+            case ("==") -> ExprCodes.EQ;
+            case ("!=") -> ExprCodes.NEQ;
+            case ("&&") -> ExprCodes.AND;
+            case ("||") -> ExprCodes.OR;
+            case (">") -> ExprCodes.GT;
+            case ("<") -> ExprCodes.LT;
+            case (">=") -> ExprCodes.GTEQ;
+            case ("<=") -> ExprCodes.LTEQ;
+            case ("+") -> ExprCodes.ADD;
+            case ("-") -> ExprCodes.SUB;
+            case ("*") -> ExprCodes.MUL;
+            case ("/") -> ExprCodes.DIV;
+            case ("%") -> ExprCodes.MOD;
+            case ("^") -> ExprCodes.POW;
+            default -> throw new IllegalStateException("Unexpected value: " + text);
+        };
 
         return new ExprAST(ctx.getStart().getLine(), visit(ctx.left), visit(ctx.right), op);
     }

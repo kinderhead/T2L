@@ -22,12 +22,10 @@ public class T2LClass extends T2LObject {
     }
 
     public void inherit(T2LObject parent) {
-        parent.PROPERTIES.forEach((k, v) -> {
-            PROPERTIES.put(k, v.clone());
-        });
+        parent.PROPERTIES.forEach((k, v) -> PROPERTIES.put(k, v.clone()));
     }
 
-    public T2LClassObj instantiate(ArrayList<T2LObject> params, String loc_name, int loc_env) {
+    public T2LClassObj instantiate(ArrayList<T2LObject> params, String loc_name, int loc_env, Executor executor) {
         T2LClassObj obj = new T2LClassObj();
         obj.ORIGIN_NAME = loc_name;
         obj.ORIGIN_ENV = loc_env;
@@ -37,6 +35,10 @@ public class T2LClass extends T2LObject {
             obj.PROPERTIES.put(i.getKey(), i.getValue().clone());
         }
         obj.NAME = NAME;
+
+        if (obj.rawContains("init")) {
+            obj.get("init").run(obj, params, executor);
+        }
 
         return obj;
     }

@@ -3,9 +3,11 @@ package io.github.kinderhead.T2L.execution;
 import io.github.kinderhead.T2L.execution.builtins.T2LAsObject;
 import io.github.kinderhead.T2L.execution.builtins.T2LFunction;
 import io.github.kinderhead.T2L.execution.builtins.T2LIterable;
+import io.github.kinderhead.T2L.execution.builtins.T2LUnlimitedArgs;
 import io.github.kinderhead.T2L.execution.errors.AccessDeniedException;
 import io.github.kinderhead.T2L.execution.errors.CallableException;
 import io.github.kinderhead.T2L.execution.errors.TypeException;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -40,6 +42,10 @@ public class JavaInterface extends T2LObject {
 
                 if (((Method) value).isAnnotationPresent(T2LFunction.class)) {
                     PARAMS.remove(0);
+                }
+
+                if (((Method) value).isAnnotationPresent(T2LUnlimitedArgs.class)) {
+                    UNLIMITED_PARAMS = true;
                 }
             } else if (value instanceof T2LObject) {
                 TYPE = T2LTypes.CUSTOM;
@@ -83,7 +89,7 @@ public class JavaInterface extends T2LObject {
         return null;
     }
 
-    public Object getSupposedValue(T2LObject obj, Class cls, Executor executor) {
+    public static Object getSupposedValue(T2LObject obj, Class cls, Executor executor) {
         if (cls.isAssignableFrom(int.class) || cls.isAssignableFrom(Integer.class)) {
             return obj.getInt(executor);
         } else if (cls.isAssignableFrom(double.class) || cls.isAssignableFrom(Double.class)) {
@@ -98,6 +104,8 @@ public class JavaInterface extends T2LObject {
             return obj.getByte(executor);
         } else if (cls.isAssignableFrom(String.class)) {
             return obj.getVString(executor);
+        } else if (cls.isAssignableFrom(boolean.class)) {
+            return obj.isTrue();
         } else if (obj instanceof JavaInterface) {
             return ((JavaInterface) obj).VALUE;
         } else if (cls.isAssignableFrom(T2LObject.class)) {
@@ -204,22 +212,42 @@ public class JavaInterface extends T2LObject {
                 boolean annotation = method.isAnnotationPresent(T2LFunction.class);
                 boolean isAsObject = method.isAnnotationPresent(T2LAsObject.class);
                 ArrayList<Object> param = new ArrayList<>();
+                ArrayList<T2LObject> extraParams = new ArrayList<>();
 
                 int idex = 0;
                 int offset = 0;
                 if (annotation) {
                     offset++;
                 }
-                for (T2LObject i : params) {
-                    Class cls = method.getParameterTypes()[offset];
 
-                    if (isAsObject && method_params[idex + offset].isAssignableFrom(T2LObject.class)) {
-                        param.add(i);
+                boolean isExtra = false;
+                for (T2LObject i : params) {
+                    Class cls;
+                    if (ArrayUtils.isArrayIndexValid(method_params, offset)) {
+                        cls = method_params[offset];
                     } else {
-                        param.add(ifArrayChangeType(method_params[idex + offset], getSupposedValue(i, cls, executor), executor));
+                        cls = T2LObject[].class;
+                    }
+
+                    if (UNLIMITED_PARAMS && offset == method_params.length - 1 && cls.isAssignableFrom(T2LObject[].class)) {
+                        isExtra = true;
+                    }
+
+                    if (!isExtra) {
+                        if (isAsObject && method_params[offset].isAssignableFrom(T2LObject.class)) {
+                            param.add(i);
+                        } else {
+                            param.add(ifArrayChangeType(method_params[offset], getSupposedValue(i, cls, executor), executor));
+                        }
+                    } else {
+                        extraParams.add(i);
                     }
                     idex++;
                     offset++;
+                }
+
+                if (UNLIMITED_PARAMS) {
+                    param.add(extraParams.toArray(new T2LObject[0]));
                 }
 
                 if (annotation) {

@@ -6,7 +6,7 @@ import io.github.kinderhead.T2L.execution.T2LError;
 public class NameUtils {
     public static void throwIfInvalid(String name) {
         if (isInvalid(name)) {
-            new T2LError(name + " cannot be used in this context", Visitor.LINE).runWithoutFail();
+            new T2LError(name + " cannot be used in this context", Visitor.LINE, "NameException").runWithoutFail();
         }
     }
 

@@ -20,6 +20,6 @@ public class ErrorListener extends BaseErrorListener {
             offSymName = "<lexer error>";
         }
 
-        new T2LError(msg + " at " + offSymName, line, charPositionInLine).runWithoutFail();
+        new T2LError(msg + " at " + offSymName, line, charPositionInLine, "SyntaxException").runWithoutFail();
     }
 }

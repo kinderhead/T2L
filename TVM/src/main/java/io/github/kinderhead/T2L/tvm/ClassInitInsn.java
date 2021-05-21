@@ -60,6 +60,6 @@ public class ClassInitInsn extends Instruction implements PassableInstruction {
             new ClassInitException().raise("Cannot instantiate non class variable " + NAME);
         }
         assert parent != null;
-        return parent.instantiate(objs, NAME, executor.CURRENT_ENVIRONMENT);
+        return parent.instantiate(objs, NAME, executor.CURRENT_ENVIRONMENT, executor);
     }
 }

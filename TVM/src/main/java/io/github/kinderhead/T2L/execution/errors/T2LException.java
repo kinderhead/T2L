@@ -8,7 +8,7 @@ public class T2LException extends T2LObject {
     public String PREFIX = "Exception: ";
 
     public void raise(String msg, int line) {
-        new T2LError(PREFIX + msg, line).run();
+        new T2LError(PREFIX + msg, line, NAME).run();
     }
 
     public void raise(String msg) {

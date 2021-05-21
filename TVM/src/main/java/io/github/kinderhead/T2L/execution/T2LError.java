@@ -3,44 +3,55 @@ package io.github.kinderhead.T2L.execution;
 import io.github.kinderhead.T2L.console.Log;
 import io.github.kinderhead.T2L.debugging.RemoteDebugger;
 
-public class T2LError {
+public class T2LError extends RuntimeException {
     private String TEXT;
+    private String TYPE;
     private int LINE;
     private int COL = -1;
     public static int COUNT = 0;
 
-    public T2LError(String txt, int line) {
+    public T2LError(String txt, int line, String type) {
+        super(getT2LMessage(line, -1, txt));
         TEXT = txt;
         LINE = line;
+        TYPE = type;
     }
 
-    public T2LError(String txt, int line, int col) {
+    public T2LError(String txt, int line, int col, String type) {
+        super(getT2LMessage(line, col, txt));
         TEXT = txt;
         LINE = line;
         COL = col;
+        TYPE = type;
     }
 
     public T2LError(String txt) {
+        super(getT2LMessage(-1, -1, txt));
         TEXT = txt;
         LINE = -1;
     }
 
-    public void runWithoutFail() {
+    private static String getT2LMessage(int LINE, int COL, String TEXT) {
         if (RemoteDebugger.INSTANCE.isConnected() && LINE != -1) {
             if (COL == -1) {
-                Log.Error(TEXT + " | On line: " + RemoteDebugger.INSTANCE.getLine(LINE));
+                return TEXT + " | On line: " + RemoteDebugger.INSTANCE.getLine(LINE);
             } else {
-                Log.Error(TEXT + " | On line: " + RemoteDebugger.INSTANCE.getLine(LINE) + ":" + RemoteDebugger.INSTANCE.getColumn(COL));
+                return TEXT + " | On line: " + RemoteDebugger.INSTANCE.getLine(LINE) + ":" + RemoteDebugger.INSTANCE.getColumn(COL);
             }
         } else {
-            Log.Error(TEXT);
+            return TEXT;
         }
+    }
+
+    public void runWithoutFail() {
+        Log.Error(getT2LMessage(LINE, COL, TEXT));
         COUNT++;
     }
 
     public void run() {
-        runWithoutFail();
-        System.exit(1);
+        throw this;
+        //runWithoutFail();
+        //System.exit(1);
     }
 
     public static void complete() {

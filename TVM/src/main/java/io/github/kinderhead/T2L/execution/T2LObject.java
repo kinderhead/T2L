@@ -22,6 +22,7 @@ public class T2LObject implements Cloneable{
 
     public ArrayList<Instruction> CODE = new ArrayList<>();
     public ArrayList<String> PARAMS = new ArrayList<>();
+    public boolean UNLIMITED_PARAMS = false;
 
     public T2LObject clone() {
         T2LObject clone;

@@ -1,3 +1,14 @@
 import java;
 
-java.from(java.asArray(["Hi", "Hello"]));
+obj = java.from("io.github.kinderhead.T2L.execution.builtins.TestObj");
+
+class ee {
+    txt;
+
+    func init "yay" {
+        this.txt = yay;
+    }
+}
+
+x = new ee("yd");
+print(x.txt);

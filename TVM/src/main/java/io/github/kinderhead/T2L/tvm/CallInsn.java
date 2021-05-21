@@ -44,12 +44,12 @@ public class CallInsn extends Instruction {
         T2LObject func = environmentGetErrorHandler(executor.CURRENT_ENVIRONMENT, NAME, executor);
         int num = func.PARAMS.size();
         ArrayList<T2LObject> objs = new ArrayList<>();
-        for (int i = 0; i < num; i++) {
+        for (int i = 0; i < SIZE; i++) {
             objs.add(executor.ENVIRONMENT.pop());
         }
         Collections.reverse(objs);
 
-        if (SIZE != num) {
+        if (SIZE != num && !func.UNLIMITED_PARAMS) {
             new ParameterException().raise("Expected " + func.PARAMS.size() + " parameter(s) instead got " + (int)SIZE + ". At function call " + func.NAME + "@" + System.identityHashCode(func), executor.CURRENT_LINE);
         }
 

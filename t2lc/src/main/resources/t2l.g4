@@ -49,6 +49,7 @@ def_params
 
 var
     : ID ASSIGN expr SCOL
+    | ID SCOL
     ;
 
 index

@@ -1,7 +1,9 @@
 package io.github.kinderhead.T2L.tvm;
 
+import io.github.kinderhead.T2L.console.Log;
 import io.github.kinderhead.T2L.execution.Executor;
 import io.github.kinderhead.T2L.execution.Reader;
+import io.github.kinderhead.T2L.execution.T2LError;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -30,7 +32,7 @@ public class Main {
             System.exit(1);
         }
 
-        String path = "";
+        String path;
         if (cmd.hasOption("i")) {
             path = cmd.getOptionValue("i");
         } else {
@@ -54,6 +56,11 @@ public class Main {
     public static void execute(ArrayList<Byte> code, ArrayList<String> paths) {
         Executor executor = new Executor(new Reader(code));
         executor.ENVIRONMENT.SEARCH_PATHS.addAll(paths);
-        executor.execute();
+        try {
+            executor.execute();
+        } catch (T2LError e) {
+            Log.Error(e.getMessage());
+            System.exit(1);
+        }
     }
 }

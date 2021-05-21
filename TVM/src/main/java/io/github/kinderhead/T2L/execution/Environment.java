@@ -45,6 +45,7 @@ public class Environment {
         set(0, "print", new Print(0), executor);
         set(0, "true", new Bool(true), executor);
         set(0, "false", new Bool(false), executor);
+        set(0, "null", new T2LObject(), executor);
         set(0, "__import", new Import(0), executor);
         //set(0, "list", new JavaInterface(new T2LList(), null));
     }
@@ -205,7 +206,7 @@ public class Environment {
         new_executor.execute();
 
         T2LClass module = new T2LClass(ENVIRONMENTS.get(new_executor.CURRENT_ENVIRONMENT));
-        T2LClassObj obj = module.instantiate(new ArrayList<>(), mod_name, -1);
+        T2LClassObj obj = module.instantiate(new ArrayList<>(), mod_name, -1, executor);
         set(executor.CURRENT_ENVIRONMENT, mod_name, obj, executor);
         MODULES.put(mod_name, obj);
         // ee
