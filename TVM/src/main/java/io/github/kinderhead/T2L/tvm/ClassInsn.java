@@ -46,7 +46,14 @@ public class ClassInsn extends Instruction {
             new_executor.runInsn(i);
         }
 
-        T2LClass obj = new T2LClass(new_executor.ENVIRONMENT.ENVIRONMENTS.get(new_executor.CURRENT_ENVIRONMENT));
+        T2LClass obj = new T2LClass();
+
+        for (String i : INHERITANCE) {
+            obj.inherit(environmentGetErrorHandler(executor.CURRENT_ENVIRONMENT, i, executor));
+        }
+
+        obj.build(new_executor.ENVIRONMENT.ENVIRONMENTS.get(new_executor.CURRENT_ENVIRONMENT).OBJECTS);
+        new_executor.ENVIRONMENT.ENVIRONMENTS.get(new_executor.CURRENT_ENVIRONMENT).OBJECTS.clear();
         obj.NAME = NAME;
         new_executor.ENVIRONMENT.set(executor.CURRENT_ENVIRONMENT, NAME, obj, executor);
     }

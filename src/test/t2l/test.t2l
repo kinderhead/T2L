@@ -1,14 +1,13 @@
 import java;
 import system;
 
-func test "hmm" {
-    return hmm + 3;
+class obj {
+    x;
 }
 
-x = java.asJava(test);
-params = [3].iter(system.getExecutor());
-print(x.run(null, params, system.getExecutor()));
-
-for i in [1,2,3] {
-    print(e);
+class obj2(obj) {
+    b;
 }
+
+print(new obj2().x);
+print(new obj2().b);
