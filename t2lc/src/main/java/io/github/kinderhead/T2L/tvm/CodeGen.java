@@ -19,6 +19,7 @@ public class CodeGen {
     }
 
     public ArrayList<Byte> getCode() {
+        MAIN_BUILDER.finish();
         return MAIN_BUILDER.CODE;
     }
 }

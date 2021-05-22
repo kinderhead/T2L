@@ -17,6 +17,7 @@ public class ExprAST extends Statement {
 
     @Override
     public void compile(Builder builder) {
+        builder.addLine(getLine());
         RIGHT.compile(builder);
         LEFT.compile(builder);
         builder.emit(new ExprInsn(OP));

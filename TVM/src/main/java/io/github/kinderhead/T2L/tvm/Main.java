@@ -53,7 +53,8 @@ public class Main {
     }
 
     public static void execute(ArrayList<Byte> code, ArrayList<String> paths) throws Throwable {
-        Executor executor = new Executor(new Reader(code));
+        Reader.INSTANCE = new Reader(code);
+        Executor executor = new Executor(Reader.INSTANCE);
         executor.ENVIRONMENT.SEARCH_PATHS.addAll(paths);
         try {
             executor.execute();

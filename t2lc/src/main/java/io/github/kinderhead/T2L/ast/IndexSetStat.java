@@ -20,6 +20,7 @@ public class IndexSetStat extends Statement {
 
     @Override
     public void compile(Builder builder) {
+        builder.addLine(getLine());
         EXPR1.compile(builder);
         EXPR2.compile(builder);
         builder.emit(new CallInsn(NAME + ".__set", new ArrayList<>(Arrays.asList(EXPR1, EXPR2)), true));

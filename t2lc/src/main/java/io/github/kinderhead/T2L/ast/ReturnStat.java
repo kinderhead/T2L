@@ -13,6 +13,7 @@ public class ReturnStat extends Statement {
 
     @Override
     public void compile(Builder builder) {
+        builder.addLine(getLine());
         RET.compile(builder);
         builder.emit(new ReturnInsn(true));
     }

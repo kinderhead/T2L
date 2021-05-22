@@ -36,7 +36,7 @@ public class Executor {
     }
 
     public void runInsn(Instruction insn) {
-        CURRENT_LINE = insn.getNumber();
+        CURRENT_LINE = Reader.INSTANCE.getLine(insn.getNumber());
         //System.out.println("Execution insn " + insn.getClass().getName() + " at env " + CURRENT_ENVIRONMENT);
         insn.execute(this);
     }

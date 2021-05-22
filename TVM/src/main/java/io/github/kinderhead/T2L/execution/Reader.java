@@ -20,16 +20,28 @@ import io.github.kinderhead.T2L.tvm.PushInsn;
 import io.github.kinderhead.T2L.tvm.ReturnInsn;
 import io.github.kinderhead.T2L.tvm.ValueInsn;
 import io.github.kinderhead.T2L.tvm.VarInsn;
+import org.apache.commons.lang3.ArrayUtils;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Reader {
+    public static Reader INSTANCE;
+
     private ArrayList<Byte> CODE;
     private int INDEX = 0;
     private int NEXT_NUMBER = 0;
+
+    private HashMap<Integer, Integer> LINES;
+    private int last_line = 0;
 
     private ArrayList<Class<Instruction>> INSNS = new ArrayList(Arrays.asList(
             ValueInsn.class,
@@ -52,7 +64,24 @@ public class Reader {
     ));
 
     public Reader(ArrayList<Byte> code) {
-        CODE = code;
+        byte[] objarr = ArrayUtils.toPrimitive(code.toArray(new Byte[0]));
+
+        ByteArrayInputStream bis = new ByteArrayInputStream(objarr);
+        ObjectInput in;
+        try {
+            in = new ObjectInputStream(bis);
+            LINES = (HashMap<Integer, Integer>) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        CODE = new ArrayList<>(Arrays.asList(ArrayUtils.toObject(bis.readAllBytes())));
+
+        try {
+            bis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<Instruction> read() {
@@ -73,7 +102,7 @@ public class Reader {
             if (i.BYTE == opcode) {
                 for (Class<Instruction> clazz: INSNS) {
                     try {
-                        insn = clazz.newInstance();
+                        insn = clazz.getDeclaredConstructor().newInstance();
                         if (insn.getOpcode() == i) {
                             insn.setNumber(NEXT_NUMBER);
                             NEXT_NUMBER++;
@@ -82,13 +111,13 @@ public class Reader {
                         } else {
                             insn = null;
                         }
-                    } catch (InstantiationException | IllegalAccessException e) {
+                    } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                         Log.Error("Cannot get default constructor for " + clazz.getName());
                     }
                 }
             }
         }
-        if (insn == null && opcode != 0) {
+        if (insn == null) {
             Log.Error("Cannot generate insn with opcode " + opcode);
         }
         return insn;
@@ -157,5 +186,13 @@ public class Reader {
         }
         getByte();
         return strings;
+    }
+
+    public int getLine(int num) {
+        if (LINES.containsKey(num)) {
+            last_line = LINES.get(num);
+            return LINES.get(num);
+        }
+        return last_line;
     }
 }

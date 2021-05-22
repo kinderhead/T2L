@@ -5,7 +5,7 @@ import io.github.kinderhead.T2L.ANTLR.t2lParser;
 import io.github.kinderhead.T2L.ErrorListener;
 import io.github.kinderhead.T2L.Visitor;
 import io.github.kinderhead.T2L.ast.StatementGroup;
-import io.github.kinderhead.T2L.debugging.RemoteDebugger;
+import io.github.kinderhead.T2L.debugging.T2LDebugger;
 import io.github.kinderhead.T2L.execution.T2LError;
 import io.github.kinderhead.T2L.tvm.CodeGen;
 import org.antlr.v4.runtime.CharStreams;
@@ -63,7 +63,7 @@ public class Main {
             out = cmd.getOptionValue("o");
         }
 
-        String path = "";
+        String path;
         if (cmd.hasOption("i")) {
             path = cmd.getOptionValue("i");
         } else {
@@ -128,8 +128,8 @@ public class Main {
     }
 
     public static ArrayList<Byte> compile(String code) {
-        RemoteDebugger.INSTANCE.IS_CONNECTED = true;
-        RemoteDebugger.INSTANCE.STATIC_CONNECTION = true;
+        T2LDebugger.INSTANCE.IS_CONNECTED = true;
+        T2LDebugger.INSTANCE.STATIC_CONNECTION = true;
 
         t2lLexer lexer = new t2lLexer(CharStreams.fromString(code));
         lexer.removeErrorListeners();

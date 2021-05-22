@@ -20,6 +20,7 @@ public class FunctionCallStat extends Statement implements PropertyGetterAST {
 
     @Override
     public void compile(Builder builder) {
+        builder.addLine(getLine());
         for (IVisitorAST obj : PARAMS) {
             obj.compile(builder);
         }

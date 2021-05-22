@@ -17,6 +17,7 @@ public class ElseIfStat extends Statement {
 
     @Override
     public void compile(Builder builder) {
+        builder.addLine(getLine());
         builder.emit(new ElseIfInsn(BODY, EXPR));
     }
 }

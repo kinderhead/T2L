@@ -17,6 +17,7 @@ public class ClassInitStat extends Statement {
 
     @Override
     public void compile(Builder builder) {
+        builder.addLine(getLine());
         for (IVisitorAST i : PARAMS) {
             i.compile(builder);
         }

@@ -20,6 +20,7 @@ public class FunctionDefStat extends Statement {
 
     @Override
     public void compile(Builder builder) {
+        builder.addLine(getLine());
         ArrayList<String> params = new ArrayList<>();
 
         for (IVisitorAST i : PARAMS.PARAMETERS) {

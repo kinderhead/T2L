@@ -1,7 +1,7 @@
 package io.github.kinderhead.T2L.execution;
 
 import io.github.kinderhead.T2L.console.Log;
-import io.github.kinderhead.T2L.debugging.RemoteDebugger;
+import io.github.kinderhead.T2L.debugging.T2LDebugger;
 
 public class T2LError extends RuntimeException {
     private String TEXT;
@@ -33,11 +33,11 @@ public class T2LError extends RuntimeException {
     }
 
     private static String getT2LMessage(int LINE, int COL, String TEXT) {
-        if (RemoteDebugger.INSTANCE.isConnected() && LINE != -1) {
+        if (T2LDebugger.INSTANCE.isConnected() && LINE != -1) {
             if (COL == -1) {
-                return TEXT + " | On line: " + RemoteDebugger.INSTANCE.getLine(LINE);
+                return TEXT + " | On line: " + T2LDebugger.INSTANCE.getLine(LINE);
             } else {
-                return TEXT + " | On line: " + RemoteDebugger.INSTANCE.getLine(LINE) + ":" + RemoteDebugger.INSTANCE.getColumn(COL);
+                return TEXT + " | On line: " + T2LDebugger.INSTANCE.getLine(LINE) + ":" + T2LDebugger.INSTANCE.getColumn(COL);
             }
         } else {
             return TEXT;

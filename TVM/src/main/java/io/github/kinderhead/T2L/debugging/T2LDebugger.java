@@ -1,7 +1,7 @@
 package io.github.kinderhead.T2L.debugging;
 
-public class RemoteDebugger {
-    public static RemoteDebugger INSTANCE = new RemoteDebugger();
+public class T2LDebugger {
+    public static T2LDebugger INSTANCE = new T2LDebugger();
     public boolean IS_CONNECTED = false;
     public boolean STATIC_CONNECTION = false;
 

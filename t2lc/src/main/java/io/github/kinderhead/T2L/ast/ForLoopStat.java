@@ -19,6 +19,7 @@ public class ForLoopStat extends Statement {
 
     @Override
     public void compile(Builder builder) {
+        builder.addLine(getLine());
         EXPR.compile(builder);
         builder.emit(new ForLoopInsn(NAME, BODY));
     }

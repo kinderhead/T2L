@@ -20,6 +20,7 @@ public class ClassStat extends Statement {
 
     @Override
     public void compile(Builder builder) {
+        builder.addLine(getLine());
         builder.emit(new ClassInsn(NAME, INHERITANCE, BODY));
     }
 }
