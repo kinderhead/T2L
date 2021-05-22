@@ -23,12 +23,12 @@ public class JavaModule extends T2LModule {
 
     @T2LFunction
     @T2LUnlimitedArgs
-    public JavaInterface from(Executor executor, String obj, T2LObject... args) {
+    public JavaInterface from(Executor executor, String fqn, T2LObject... args) {
         Class cls = null;
         try {
-            cls = Class.forName(obj);
+            cls = Class.forName(fqn);
         } catch (ClassNotFoundException e) {
-            new TypeException().raise("Cannot get class " + obj, executor.CURRENT_LINE);
+            new TypeException().raise("Cannot get class " + fqn, executor.CURRENT_LINE);
         }
 
         for (Constructor i : cls.getConstructors()) {
@@ -55,7 +55,7 @@ public class JavaModule extends T2LModule {
             try {
                 return new JavaInterface(i.newInstance(params.toArray()), null);
             } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
-                new CallableException().raise("Error running constructor for object " + obj);
+                new CallableException().raise("Error running constructor for object " + fqn);
             }
         }
         return null;
