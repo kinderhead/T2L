@@ -13,11 +13,10 @@ import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Throwable {
         Options options = new Options();
         options.addOption("i", "input", true, "Input file");
         options.addOption("p", "path", true, "Default search path for imports");
@@ -53,13 +52,16 @@ public class Main {
         execute(obj, paths);
     }
 
-    public static void execute(ArrayList<Byte> code, ArrayList<String> paths) {
+    public static void execute(ArrayList<Byte> code, ArrayList<String> paths) throws Throwable {
         Executor executor = new Executor(new Reader(code));
         executor.ENVIRONMENT.SEARCH_PATHS.addAll(paths);
         try {
             executor.execute();
         } catch (T2LError e) {
             Log.Error(e.getMessage());
+            if (e.SOURCE != null) {
+                throw e.SOURCE;
+            }
             System.exit(1);
         }
     }

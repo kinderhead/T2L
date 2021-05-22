@@ -1,14 +1,10 @@
 import java;
+import system;
 
-obj = java.from("io.github.kinderhead.T2L.execution.builtins.TestObj");
-
-class ee {
-    txt;
-
-    func init "yay" {
-        this.txt = yay;
-    }
+func test "hmm" {
+    return hmm + 3;
 }
 
-x = new ee("yd");
-print(x.txt);
+x = java.asJava(test);
+params = [3].iter(system.getExecutor());
+print(x.run(null, params, system.getExecutor()));

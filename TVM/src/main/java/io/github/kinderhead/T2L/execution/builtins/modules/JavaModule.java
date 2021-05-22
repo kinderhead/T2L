@@ -40,7 +40,7 @@ public class JavaModule extends T2LModule {
                 Object param_obj;
                 try {
                     param_obj = JavaInterface.getSupposedValue(args[edex], e, executor);
-                } catch (T2LError ex) {
+                } catch (T2LError | ArrayIndexOutOfBoundsException ex) {
                     isBreak = true;
                     break;
                 }
@@ -65,5 +65,11 @@ public class JavaModule extends T2LModule {
     @T2LAsObject
     public Object[] asArray(Executor executor, T2LObject obj) {
         return obj.getIterable(executor).toArray();
+    }
+
+    @T2LFunction
+    @T2LAsObject
+    public JavaInterface asJava(Executor executor, T2LObject obj) {
+        return new JavaInterface(obj, null);
     }
 }

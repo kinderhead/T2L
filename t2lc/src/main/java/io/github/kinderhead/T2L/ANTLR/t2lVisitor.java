@@ -166,6 +166,13 @@ public interface t2lVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAtomOp(t2lParser.AtomOpContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code MultiOp}
+	 * labeled alternative in {@link t2lParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMultiOp(t2lParser.MultiOpContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code ExprOp}
 	 * labeled alternative in {@link t2lParser#expr}.
 	 * @param ctx the parse tree

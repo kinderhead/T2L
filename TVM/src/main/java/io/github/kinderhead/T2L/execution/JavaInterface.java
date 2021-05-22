@@ -6,6 +6,7 @@ import io.github.kinderhead.T2L.execution.builtins.T2LIterable;
 import io.github.kinderhead.T2L.execution.builtins.T2LUnlimitedArgs;
 import io.github.kinderhead.T2L.execution.errors.AccessDeniedException;
 import io.github.kinderhead.T2L.execution.errors.CallableException;
+import io.github.kinderhead.T2L.execution.errors.InternalException;
 import io.github.kinderhead.T2L.execution.errors.TypeException;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -47,8 +48,6 @@ public class JavaInterface extends T2LObject {
                 if (((Method) value).isAnnotationPresent(T2LUnlimitedArgs.class)) {
                     UNLIMITED_PARAMS = true;
                 }
-            } else if (value instanceof T2LObject) {
-                TYPE = T2LTypes.CUSTOM;
             } else {
                 TYPE = T2LTypes.CUSTOM;
             }
@@ -258,8 +257,15 @@ public class JavaInterface extends T2LObject {
                     return (T2LObject) out;
                 }
                 return new JavaInterface(out, null);
-            } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
+            } catch (IllegalAccessException | IllegalArgumentException e) {
                 new CallableException().raise("Error running java object " + VALUE.getClass().getName() + "@" + System.identityHashCode(VALUE), executor.CURRENT_LINE);
+            } catch (InvocationTargetException e) {
+                Throwable err = e.getCause();
+                if (err instanceof T2LError) {
+                    ((T2LError) err).run();
+                } else {
+                    new InternalException(e).raise("Internal exception occured", executor.CURRENT_LINE);
+                }
             }
         }
         return super.run(obj, params, executor);

@@ -5,7 +5,7 @@ import io.github.kinderhead.T2L.tvm.CallInsn;
 
 import java.util.ArrayList;
 
-public class FunctionCallStat extends Statement {
+public class FunctionCallStat extends Statement implements PropertyGetterAST {
     public ArrayList<IVisitorAST> PARAMS;
     public ID ID;
     public boolean USING_RET;
@@ -23,6 +23,16 @@ public class FunctionCallStat extends Statement {
         for (IVisitorAST obj : PARAMS) {
             obj.compile(builder);
         }
-        builder.emit(new CallInsn(this.ID.NAME, PARAMS, USING_RET));
+        builder.emit(new CallInsn(ID.NAME, PARAMS, USING_RET));
+    }
+
+    @Override
+    public String getName() {
+        return ID.NAME;
+    }
+
+    @Override
+    public void setName(String name) {
+        ID.NAME = name;
     }
 }

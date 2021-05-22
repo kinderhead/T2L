@@ -316,6 +316,18 @@ public class t2lBaseListener implements t2lListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMultiOp(t2lParser.MultiOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMultiOp(t2lParser.MultiOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExprOp(t2lParser.ExprOpContext ctx) { }
 	/**
 	 * {@inheritDoc}

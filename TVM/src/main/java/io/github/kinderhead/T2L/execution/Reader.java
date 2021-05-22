@@ -15,6 +15,7 @@ import io.github.kinderhead.T2L.tvm.Instruction;
 import io.github.kinderhead.T2L.tvm.ListInsn;
 import io.github.kinderhead.T2L.tvm.OpCodes;
 import io.github.kinderhead.T2L.tvm.PopInsn;
+import io.github.kinderhead.T2L.tvm.PropertyInsn;
 import io.github.kinderhead.T2L.tvm.PushInsn;
 import io.github.kinderhead.T2L.tvm.ReturnInsn;
 import io.github.kinderhead.T2L.tvm.ValueInsn;
@@ -46,7 +47,8 @@ public class Reader {
             ListInsn.class,
             ForLoopInsn.class,
             ElseIfInsn.class,
-            DictionaryInsn.class
+            DictionaryInsn.class,
+            PropertyInsn.class
     ));
 
     public Reader(ArrayList<Byte> code) {
@@ -93,15 +95,15 @@ public class Reader {
     }
 
     public String getString() {
-        String out = "";
+        StringBuilder out = new StringBuilder();
         byte next = getByte();
 
         while (next != 0x00) {
-            out = out + new String(new byte[]{next}, StandardCharsets.UTF_8);
+            out.append(new String(new byte[]{next}, StandardCharsets.UTF_8));
             next = getByte();
         }
 
-        return out;
+        return out.toString();
     }
 
     public double getInt() {

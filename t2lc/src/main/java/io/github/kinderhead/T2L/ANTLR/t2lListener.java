@@ -268,6 +268,18 @@ public interface t2lListener extends ParseTreeListener {
 	 */
 	void exitAtomOp(t2lParser.AtomOpContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code MultiOp}
+	 * labeled alternative in {@link t2lParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterMultiOp(t2lParser.MultiOpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code MultiOp}
+	 * labeled alternative in {@link t2lParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitMultiOp(t2lParser.MultiOpContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code ExprOp}
 	 * labeled alternative in {@link t2lParser#expr}.
 	 * @param ctx the parse tree

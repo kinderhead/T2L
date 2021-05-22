@@ -20,6 +20,7 @@ import io.github.kinderhead.T2L.ast.ListAST;
 import io.github.kinderhead.T2L.ast.NameUtils;
 import io.github.kinderhead.T2L.ast.PairAST;
 import io.github.kinderhead.T2L.ast.ParameterGroup;
+import io.github.kinderhead.T2L.ast.PropertyAST;
 import io.github.kinderhead.T2L.ast.ReturnStat;
 import io.github.kinderhead.T2L.ast.Statement;
 import io.github.kinderhead.T2L.ast.StatementGroup;
@@ -181,6 +182,11 @@ public class Visitor extends t2lBaseVisitor<IVisitorAST> {
     @Override
     public IVisitorAST visitAtomOp(t2lParser.AtomOpContext ctx) {
         return visit(ctx.atom());
+    }
+
+    @Override
+    public IVisitorAST visitMultiOp(t2lParser.MultiOpContext ctx) {
+        return new PropertyAST(ctx.getStart().getLine(), visit(ctx.expr(0)), visit(ctx.expr(1)));
     }
 
     @Override

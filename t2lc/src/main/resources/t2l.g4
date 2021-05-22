@@ -105,6 +105,7 @@ expr
     | ID OSQUARE expr CSQUARE                         #IndexOp
     | ID OPAR params CPAR                             #FuncOp
     | NEW ID OPAR params CPAR                         #ClassOp
+    | expr '.' expr                                   #MultiOp
     ;
 
 pair

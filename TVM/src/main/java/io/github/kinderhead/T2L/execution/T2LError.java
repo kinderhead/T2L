@@ -9,6 +9,7 @@ public class T2LError extends RuntimeException {
     private int LINE;
     private int COL = -1;
     public static int COUNT = 0;
+    public Throwable SOURCE;
 
     public T2LError(String txt, int line, String type) {
         super(getT2LMessage(line, -1, txt));

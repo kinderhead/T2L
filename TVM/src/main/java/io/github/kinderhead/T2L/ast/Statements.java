@@ -15,5 +15,6 @@ public enum Statements {
     LIST,
     INDEX,
     FOR,
-    PAIR
+    PAIR,
+    PROPERTY
 }

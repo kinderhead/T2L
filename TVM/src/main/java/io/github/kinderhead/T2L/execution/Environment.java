@@ -4,6 +4,7 @@ import io.github.kinderhead.T2L.execution.builtins.Bool;
 import io.github.kinderhead.T2L.execution.builtins.Import;
 import io.github.kinderhead.T2L.execution.builtins.Print;
 import io.github.kinderhead.T2L.execution.builtins.modules.JavaModule;
+import io.github.kinderhead.T2L.execution.builtins.modules.SystemModule;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -35,6 +36,7 @@ public class Environment {
         }
         ENVIRONMENTS.put(0, new LocalEnvironment());
         registerModule(new JavaModule());
+        registerModule(new SystemModule());
     }
 
     public void registerModule(T2LModule module) {

@@ -3,7 +3,6 @@ package io.github.kinderhead.T2L.t2lc;
 import io.github.kinderhead.T2L.tvm.Main;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.security.Permission;
 
 class MainTest {
@@ -29,7 +28,7 @@ class MainTest {
      */
 
     @Test
-    void runFile() throws IOException {
+    void runFile() throws Throwable {
         System.setSecurityManager(new SecurityManager() {
 
             @Override
