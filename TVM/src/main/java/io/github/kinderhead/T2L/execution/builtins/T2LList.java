@@ -2,6 +2,8 @@ package io.github.kinderhead.T2L.execution.builtins;
 
 import io.github.kinderhead.T2L.execution.Executor;
 import io.github.kinderhead.T2L.execution.T2LObject;
+import io.github.kinderhead.T2L.execution.errors.IndexOutOfBoundsException;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,9 @@ public class T2LList {
 
     @T2LFunction
     public void __set(Executor executor, int id, T2LObject obj) {
+        if (!ArrayUtils.isArrayIndexValid(DATA.toArray(), id)) {
+            new IndexOutOfBoundsException().raise(String.valueOf(id), executor.CURRENT_LINE);
+        }
         DATA.remove(id);
         DATA.add(id, obj);
     }
