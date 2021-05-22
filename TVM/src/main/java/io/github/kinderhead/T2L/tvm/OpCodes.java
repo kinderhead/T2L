@@ -1,5 +1,10 @@
 package io.github.kinderhead.T2L.tvm;
 
+/**
+ * All opcodes for instructions.
+ *
+ * @see Instruction
+ */
 public enum OpCodes {
     CALL((byte) 0x01),
     VALUE((byte) 0x02),

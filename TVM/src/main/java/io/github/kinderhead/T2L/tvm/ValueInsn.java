@@ -29,7 +29,7 @@ public class ValueInsn extends Instruction implements PassableInstruction {
 
     @Override
     public void serialize(Builder builder) {
-        if (type == "string") {
+        if (type.equals("string")) {
             builder.emit(STR_TYPE);
             builder.emit(string);
         } else {

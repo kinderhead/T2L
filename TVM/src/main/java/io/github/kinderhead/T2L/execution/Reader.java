@@ -32,7 +32,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
+/**
+ * The bytecode reader.
+ */
 public class Reader {
     public static Reader INSTANCE;
 
@@ -43,7 +47,10 @@ public class Reader {
     private HashMap<Integer, Integer> LINES;
     private int last_line = 0;
 
-    private ArrayList<Class<Instruction>> INSNS = new ArrayList(Arrays.asList(
+    /**
+     * All instructions must be registered here.
+     */
+    public ArrayList<Class<Instruction>> INSNS = new ArrayList(Arrays.asList(
             ValueInsn.class,
             CallInsn.class,
             PushInsn.class,
@@ -63,6 +70,11 @@ public class Reader {
             PropertyInsn.class
     ));
 
+    /**
+     * Creates the reader.
+     *
+     * @param code The code
+     */
     public Reader(ArrayList<Byte> code) {
         byte[] objarr = ArrayUtils.toPrimitive(code.toArray(new Byte[0]));
 
@@ -84,6 +96,11 @@ public class Reader {
         }
     }
 
+    /**
+     * Read all instructions.
+     *
+     * @return The instructions
+     */
     public ArrayList<Instruction> read() {
         ArrayList<Instruction> out = new ArrayList<>();
 
@@ -94,6 +111,12 @@ public class Reader {
         return out;
     }
 
+    /**
+     * Get an instruction
+     *
+     * @return The instruction
+     * @see io.github.kinderhead.T2L.tvm.Builder#emit(Instruction)
+     */
     public Instruction getInsn() {
         Instruction insn = null;
         byte opcode = getByte();
@@ -123,6 +146,12 @@ public class Reader {
         return insn;
     }
 
+    /**
+     * Get a string.
+     *
+     * @return The string
+     * @see io.github.kinderhead.T2L.tvm.Builder#emit(String)
+     */
     public String getString() {
         StringBuilder out = new StringBuilder();
         byte next = getByte();
@@ -135,6 +164,12 @@ public class Reader {
         return out.toString();
     }
 
+    /**
+     * Get a double.
+     *
+     * @return The number
+     * @see io.github.kinderhead.T2L.tvm.Builder#emit(double)
+     */
     public double getInt() {
         byte[] arr = new byte[8];
 
@@ -145,6 +180,12 @@ public class Reader {
         return ByteBuffer.wrap(arr).getDouble();
     }
 
+    /**
+     * Get a byte.
+     *
+     * @return The byte
+     * @see io.github.kinderhead.T2L.tvm.Builder#emit(byte)
+     */
     public byte getByte() {
         if (INDEX != CODE.size()) {
             byte out = CODE.get(INDEX);
@@ -154,6 +195,11 @@ public class Reader {
         return 0;
     }
 
+    /**
+     * Peek at next byte.
+     *
+     * @return The byte
+     */
     public byte peekByte() {
         if (INDEX != CODE.size()) {
             return CODE.get(INDEX);
@@ -161,11 +207,24 @@ public class Reader {
         return 0;
     }
 
+    /**
+     * Get a boolean.
+     *
+     * @return The bool
+     * @see io.github.kinderhead.T2L.tvm.Builder#emit(boolean)
+     */
     public boolean getBool() {
         byte b = getByte();
         return b == (byte) 0x01;
     }
 
+    /**
+     * Get instructions.
+     * Stops after a <code>0xFF</code> byte.
+     *
+     * @return The instructions
+     * @see io.github.kinderhead.T2L.tvm.Builder#emitStatementArray(List)
+     */
     public ArrayList<Instruction> getInsns() {
         ArrayList<Instruction> insns = new ArrayList<>();
         byte peek = peekByte();
@@ -177,6 +236,13 @@ public class Reader {
         return insns;
     }
 
+    /**
+     * Get strings.
+     * Stops after a <code>0xFF</code> byte.
+     *
+     * @return The strings
+     * @see io.github.kinderhead.T2L.tvm.Builder#emitStringArray(List)
+     */
     public ArrayList<String> getStrings() {
         ArrayList<String> strings = new ArrayList<>();
         byte peek = peekByte();
@@ -188,6 +254,12 @@ public class Reader {
         return strings;
     }
 
+    /**
+     * Get the line of an instruction.
+     *
+     * @param num A number from {@link Instruction#getNumber()}
+     * @return The line
+     */
     public int getLine(int num) {
         if (LINES.containsKey(num)) {
             last_line = LINES.get(num);
