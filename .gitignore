@@ -1,6 +1,7 @@
 # Project exclude paths
 /.gradle/
 /build/
+/out/
 /t2lc/build/
 /t2lc/build/classes/java/main/
 /t2lc/build/classes/java/test/

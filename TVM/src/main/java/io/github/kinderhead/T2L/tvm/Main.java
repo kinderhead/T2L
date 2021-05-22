@@ -27,7 +27,7 @@ public class Main {
             cmd = parser.parse(options, args);
         } catch (ParseException e) {
             System.out.println("Invalid usage");
-            new HelpFormatter().printHelp("t2lc", options);
+            new HelpFormatter().printHelp("tvm", options);
             System.exit(1);
         }
 
