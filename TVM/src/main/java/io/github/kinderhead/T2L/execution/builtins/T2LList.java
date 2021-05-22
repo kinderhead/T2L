@@ -52,6 +52,7 @@ public class T2LList {
     }
 
     @T2LIterable
+    @T2LFunction
     public List<T2LObject> iter(Executor executor) {
         return DATA;
     }
