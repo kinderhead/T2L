@@ -1,5 +1,6 @@
 package io.github.kinderhead.T2L.ast;
 
+@Deprecated
 public enum Statements {
     FUNCTION,
     GROUP,

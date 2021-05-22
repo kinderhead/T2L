@@ -20,6 +20,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+/**
+ * Global environment for current thread.
+ * Set the {@link Environment#ENVIRONMENTS} of a new thread's
+ * environment to this one's {@link Environment#ENVIRONMENTS}.
+ */
 public class Environment {
     public Map<Integer, LocalEnvironment> ENVIRONMENTS = new HashMap<>();
     private int env_num = 0;
@@ -28,6 +33,9 @@ public class Environment {
     public ArrayList<String> SEARCH_PATHS = new ArrayList<>();
     public Map<String, T2LObject> MODULES = new HashMap<>();
 
+    /**
+     * Creates an environment.
+     */
     public Environment() {
         try {
             SEARCH_PATHS.add(new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getPath());
@@ -39,10 +47,22 @@ public class Environment {
         registerModule(new SystemModule());
     }
 
+    /**
+     * Registers a {@link T2LModule}.
+     *
+     * @param module The module
+     * @see T2LModule
+     */
     public void registerModule(T2LModule module) {
         JAVA_MODULES.add(module);
     }
 
+    /**
+     * Populates the base environment with builtins.
+     * Should only run once per session.
+     *
+     * @param executor Executor
+     */
     public void populateBase(Executor executor) {
         set(0, "print", new Print(0), executor);
         set(0, "true", new Bool(true), executor);
@@ -52,14 +72,32 @@ public class Environment {
         //set(0, "list", new JavaInterface(new T2LList(), null));
     }
 
+    /**
+     * Push an object to the stack.
+     *
+     * @param obj The object to push
+     * @see T2LObject
+     */
     public void push(T2LObject obj) {
         STACK.add(obj);
     }
 
+    /**
+     * Pops the most recent object on the stack.
+     *
+     * @return The popped object
+     */
     public T2LObject pop() {
         return STACK.pop();
     }
 
+    /**
+     * Gets a variable with the environment.
+     *
+     * @param env Source env
+     * @param name The name
+     * @return A {@link Map.Entry} of the env and object or null
+     */
     private Map.Entry<Integer, T2LObject> getWithEnvironment(int env, String name) {
         String rest = "";
 
@@ -93,6 +131,13 @@ public class Environment {
         return obj.get(rest);
     }
 
+    /**
+     * Get a variable from the environment.
+     *
+     * @param env The source env
+     * @param name The name
+     * @return The object or null
+     */
     public T2LObject get(int env, String name) {
         Map.Entry<Integer, T2LObject> kv = getWithEnvironment(env, name);
         if (kv == null || kv.getValue() == null) {
@@ -101,6 +146,13 @@ public class Environment {
         return kv.getValue();
     }
 
+    /**
+     * Gets the environment number of an object.
+     *
+     * @param env The source env
+     * @param name The name
+     * @return The environment or -1
+     */
     public int variableInEnv(int env, String name) {
         Map.Entry<Integer, T2LObject> kv = getWithEnvironment(env, name);
         if (kv == null) {
@@ -109,6 +161,14 @@ public class Environment {
         return kv.getKey();
     }
 
+    /**
+     * Set a variable in the environment.
+     *
+     * @param env The source env
+     * @param name The name
+     * @param obj The object
+     * @param executor Executor
+     */
     public void set(int env, String name, T2LObject obj, Executor executor) {
         int num = variableInEnv(env, name);
         int this_env;
@@ -143,6 +203,12 @@ public class Environment {
         }
     }
 
+    /**
+     * Creates and registers a new environment.
+     *
+     * @param prev The source environment
+     * @return The new environment
+     */
     public int newEnvironment(int prev) {
         env_num++;
         ENVIRONMENTS.put(env_num, new LocalEnvironment());
@@ -150,10 +216,24 @@ public class Environment {
         return env_num;
     }
 
+    /**
+     * Imports a file or builtin.
+     *
+     * @param name The name
+     * @param executor executor
+     */
     public void importFile(String name, Executor executor) {
         importFile(name, executor, true);
     }
 
+    /**
+     * Imports a file or builtin.
+     *
+     * @param name The name
+     * @param executor Executor
+     * @param err Is it the first recursion?
+     * @return If is succeded
+     */
     public boolean importFile(String name, Executor executor, boolean err) {
         name = name.replace(".", "/");
         File file = new File(name + ".t2lm");

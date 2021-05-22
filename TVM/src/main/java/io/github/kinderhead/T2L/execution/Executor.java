@@ -4,6 +4,9 @@ import io.github.kinderhead.T2L.tvm.Instruction;
 
 import java.util.ArrayList;
 
+/**
+ * The execution engine for all code.
+ */
 public class Executor {
     private final Reader READER;
 
@@ -14,6 +17,13 @@ public class Executor {
     public boolean RETURNING;
     public boolean RETURNING_VALUE;
 
+    /**
+     * Creates an executor with a reader.
+     * Should only be used as the first executor.
+     *
+     * @param reader A reader
+     * @see Reader
+     */
     public Executor(Reader reader) {
         READER = reader;
         CODE = reader.read();
@@ -21,11 +31,22 @@ public class Executor {
         ENVIRONMENT.populateBase(this);
     }
 
+    /**
+     * Creates an executor with environment.
+     *
+     * @param env The environment
+     * @see Environment
+     */
     public Executor(Environment env) {
         ENVIRONMENT = env;
         READER = null;
     }
 
+    /**
+     * Start executing all {@link Instruction}s in property {@link Executor#CODE}.
+     *
+     * @see Instruction
+     */
     public void execute() {
         for (Instruction insn : CODE) {
             runInsn(insn);
@@ -35,6 +56,12 @@ public class Executor {
         }
     }
 
+    /**
+     * Runs a singular instruction.
+     *
+     * @param insn The instruction to run
+     * @see Instruction
+     */
     public void runInsn(Instruction insn) {
         CURRENT_LINE = Reader.INSTANCE.getLine(insn.getNumber());
         //System.out.println("Execution insn " + insn.getClass().getName() + " at env " + CURRENT_ENVIRONMENT);
