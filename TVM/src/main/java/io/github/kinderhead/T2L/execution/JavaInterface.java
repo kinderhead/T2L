@@ -18,10 +18,22 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Wrapper for java objects to be used in the T2L environment
+ *
+ * @see Environment
+ */
 public class JavaInterface extends T2LObject {
     public Object VALUE;
     public Object PARENT;
 
+    /**
+     * Creates a wrapper of object with parent.
+     * The parent should be null unless <code>value</code> is of type {@link Method}
+     *
+     * @param value Object to wrap
+     * @param parent Parent object
+     */
     public JavaInterface(Object value, Object parent) {
         VALUE = value;
         if (value != null) {
@@ -56,6 +68,12 @@ public class JavaInterface extends T2LObject {
         }
     }
 
+    /**
+     * Gets a {@link Field} from the object.
+     *
+     * @param name The name
+     * @return The field or null
+     */
     private Field getRawField(String name) {
         Field[] fields = VALUE.getClass().getFields();
         for (Field i : fields) {
@@ -66,6 +84,13 @@ public class JavaInterface extends T2LObject {
         return null;
     }
 
+    /**
+     * Gets the value of a field.
+     * Returns null if the field doesn't exist or cannot be accessed.
+     *
+     * @param name The name
+     * @return The field value or null.
+     */
     private Object getField(String name) {
         Field ret = getRawField(name);
         if (ret != null) {
@@ -78,6 +103,12 @@ public class JavaInterface extends T2LObject {
         return null;
     }
 
+    /**
+     * Gets a method from the object.
+     *
+     * @param name The name
+     * @return The method or null
+     */
     private Method getMethod(String name) {
         Method[] methods = VALUE.getClass().getMethods();
         for (Method i : methods) {
@@ -88,6 +119,21 @@ public class JavaInterface extends T2LObject {
         return null;
     }
 
+    /**
+     * Tries to convert an object to a desired class.
+     * If it fails it will throw an error. Use the following to catch it.
+     * <pre>{@code
+     * try {
+     *      JavaInterface.getSupposedValue(obj, cls, executor);
+     * } catch (T2LError e) {
+     *      // Object cannot become of type cls
+     * }
+     * }</pre>
+     * @param obj Object to convert
+     * @param cls Class to covert to
+     * @param executor Executor
+     * @return The object
+     */
     public static Object getSupposedValue(T2LObject obj, Class cls, Executor executor) {
         if (cls.isAssignableFrom(int.class) || cls.isAssignableFrom(Integer.class)) {
             return obj.getInt(executor);
@@ -115,6 +161,13 @@ public class JavaInterface extends T2LObject {
         }
     }
 
+    /**
+     * Gets a {@link JavaInterface} wrapper for an object.
+     * Caches java object if it has not been queried before.
+     *
+     * @param name The name
+     * @return The wrapped object
+     */
     private JavaInterface getT2LObject(String name) {
         if (PROPERTIES.containsKey(name)) {
             return (JavaInterface) PROPERTIES.get(name);
@@ -159,6 +212,14 @@ public class JavaInterface extends T2LObject {
         return ret;
     }
 
+    /**
+     * If object is an array, then convert the array to a different type.
+     *
+     * @param cls Class to convert to
+     * @param obj Object, preferably an array
+     * @param executor Executor
+     * @return The finished object
+     */
     public Object ifArrayChangeType(Class cls, Object obj, Executor executor) {
         if (!cls.isArray()) {
             return obj;
@@ -175,11 +236,25 @@ public class JavaInterface extends T2LObject {
         return Arrays.copyOf(out.toArray(), out.size(), cls);
     }
 
+    /**
+     * The raw method to get an object. Overload this method for custom property functionality.
+     * overloading the property getter.
+     *
+     * @param name The name
+     * @return The object
+     */
     @Override
     public T2LObject rawGet(String name) {
         return getT2LObject(name);
     }
 
+    /**
+     * The raw method to check if a property exists. Overload this method for custom property functionality.
+     * overloading the property getter.
+     *
+     * @param name The name
+     * @return If the property exists
+     */
     @Override
     public boolean rawContains(String name) {
         if (VALUE == null) {
@@ -189,6 +264,14 @@ public class JavaInterface extends T2LObject {
                 Arrays.stream(VALUE.getClass().getMethods()).anyMatch(f -> f.getName().equals(name));
     }
 
+    /**
+     * The raw method to set an object. Overload this method for custom property functionality.
+     * overloading the property setter.
+     *
+     * @param name The name
+     * @param obj The object to set
+     * @param executor Executor
+     */
     @Override
     public void rawPut(String name, T2LObject obj, Executor executor) {
         Field field = getRawField(name);
@@ -202,6 +285,14 @@ public class JavaInterface extends T2LObject {
         }
     }
 
+    /**
+     * Runs a java method. {@link JavaInterface#VALUE} must be of type {@link Method}.
+     *
+     * @param obj Parent object that is passed to {@link Method#invoke(Object, Object...)}
+     * @param params List of parameters
+     * @param executor Executor
+     * @return The return value. Returns a null T2LObject otherwise
+     */
     @Override
     public T2LObject run(T2LObject obj, List<T2LObject> params, Executor executor) {
         if (VALUE instanceof Method) {
@@ -271,6 +362,13 @@ public class JavaInterface extends T2LObject {
         return super.run(obj, params, executor);
     }
 
+    /**
+     * Gets the list representation of the object to iterate over.
+     * Runs a method called <code>iter</code> with the {@link T2LIterable @T2LIterable} annotation.
+     *
+     * @param executor Executor
+     * @return A list of objects
+     */
     @Override
     public List<T2LObject> getIterable(Executor executor) {
         if (Arrays.stream(VALUE.getClass().getMethods()).anyMatch(f -> f.getName().equals("iter"))) {
@@ -287,6 +385,11 @@ public class JavaInterface extends T2LObject {
         return super.getIterable(executor);
     }
 
+    /**
+     * Copies the object.
+     *
+     * @return The copied object
+     */
     @Override
     public T2LObject clone() {
         JavaInterface obj = (JavaInterface) super.clone();

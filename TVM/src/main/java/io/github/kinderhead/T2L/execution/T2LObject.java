@@ -7,9 +7,19 @@ import io.github.kinderhead.T2L.execution.errors.ValueMissingException;
 import io.github.kinderhead.T2L.tvm.Instruction;
 
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
-public class T2LObject implements Cloneable{
+/**
+ * All objects in the environment are an instance or a subclass instance of this.
+ *
+ * @see Environment
+ */
+public class T2LObject implements Cloneable {
     public Map<String, T2LObject> PROPERTIES = new HashMap<>();
 
     public T2LTypes TYPE;
@@ -24,6 +34,11 @@ public class T2LObject implements Cloneable{
     public ArrayList<String> PARAMS = new ArrayList<>();
     public boolean UNLIMITED_PARAMS = false;
 
+    /**
+     * Copies the object.
+     *
+     * @return The copied object
+     */
     public T2LObject clone() {
         T2LObject clone;
         try {
@@ -53,22 +68,45 @@ public class T2LObject implements Cloneable{
         return clone;
     }
 
+    /**
+     * Creates a null object
+     */
     public T2LObject() {
         TYPE = T2LTypes.NULL;
         NAME = "null";
     }
 
+    /**
+     * Creates an object of type.
+     *
+     * @param type The type of the object
+     */
     public T2LObject(T2LTypes type) {
         TYPE = type;
         NAME = type.name().toLowerCase(Locale.ROOT);
     }
 
+    /**
+     * Creates an object of type with environment number.
+     *
+     * @param type The type of the object
+     * @param env The environment number
+     * @see Environment
+     */
     public T2LObject(T2LTypes type, int env) {
         TYPE = type;
         ENV = env;
         NAME = type.name().toLowerCase(Locale.ROOT);
     }
 
+    /**
+     * Runs a function. Must overload this function to run code.
+     *
+     * @param obj Parent object that is set to <code>this</code>
+     * @param params List of parameters
+     * @param executor Executor
+     * @return The return value. Returns a null T2LObject otherwise
+     */
     public T2LObject run(T2LObject obj, List<T2LObject> params, Executor executor) {
         new CallableException().raise("Object " + NAME + "@" + System.identityHashCode(this) + " does not support operation call");
         return new T2LObject();
@@ -210,6 +248,12 @@ public class T2LObject implements Cloneable{
         return true;
     }
 
+    /**
+     * Gets the string representation of the object.
+     *
+     * @param executor Executor
+     * @return The string
+     */
     public String getString(Executor executor) {
         if (TYPE == T2LTypes.STRING) {
             return STRING;
@@ -225,10 +269,23 @@ public class T2LObject implements Cloneable{
         return "[Object " + NAME + "@" + System.identityHashCode(this) + "]";
     }
 
+    /**
+     * Checks if the type is equal to another object.
+     *
+     * @param obj Object to compare with
+     * @return Is type equal
+     */
     public boolean isTypeEqual(T2LObject obj) {
         return obj.TYPE == this.TYPE;
     }
 
+    /**
+     * Gets a property. Throws an error if it doesn't exist.
+     *
+     * @param name The name of the property
+     * @param executor Executor
+     * @return The object
+     */
     public T2LObject get(String name, Executor executor) {
         T2LObject obj = get(name);
         if (obj != null) {
@@ -241,15 +298,32 @@ public class T2LObject implements Cloneable{
     /**
      * WARNING: Only use this if you know the property exists, or if you check if return value is null
      * Does not require an executor
+     *
+     * @param name The name
+     * @return The object or null
      */
     public T2LObject get(String name) {
         return getObjFromProperties(name, false);
     }
 
+    /**
+     * Sets a property. Will overwrite any other object.
+     *
+     * @param name The name
+     * @param obj The object to set
+     * @param executor Executor
+     */
     public void set(String name, T2LObject obj, Executor executor) {
         getObjFromProperties(name, true).rawPut(name, obj, executor);
     }
 
+    /**
+     * Gets any objects inside the hierarchy.
+     *
+     * @param name The name
+     * @param setting Is it the first recursion?
+     * @return The object
+     */
     public T2LObject getObjFromProperties(String name, boolean setting) {
         if (!name.contains(".")) {
             if (setting) {
@@ -272,19 +346,52 @@ public class T2LObject implements Cloneable{
         return rawGet(name).getObjFromProperties(rest, false);
     }
 
+    /**
+     * The raw method to get an object. Overload this method for custom property functionality.
+     * See {@link JavaInterface#rawGet(String)} method for an example of
+     * overloading the property getter.
+     *
+     * @param name The name
+     * @return The object
+     */
     public T2LObject rawGet(String name) {
         return PROPERTIES.get(name);
     }
 
+    /**
+     * The raw method to set an object. Overload this method for custom property functionality.
+     * See {@link JavaInterface#rawPut(String, T2LObject, Executor)} method for an example of
+     * overloading the property setter.
+     *
+     * @param name The name
+     * @param obj The object to set
+     * @param executor Executor
+     */
     public void rawPut(String name, T2LObject obj, Executor executor) {
         PROPERTIES.put(name, obj);
     }
 
+    /**
+     * The raw method to check if a property exists. Overload this method for custom property functionality.
+     * See {@link JavaInterface#rawContains(String)} method for an example of
+     * overloading the property getter.
+     *
+     * @param name The name
+     * @return If the property exists
+     */
     public boolean rawContains(String name) {
         return PROPERTIES.containsKey(name);
     }
 
-    public Object getJavaObject(T2LObject obj) {
+    /**
+     * Gets the java object from an object.
+     * If the object is not a string or number, it will return null.
+     *
+     * @param obj The object
+     * @return The java object or null
+     * @see JavaInterface#getSupposedValue(T2LObject, Class, Executor)
+     */
+    public static Object getJavaObject(T2LObject obj) {
         if (obj.TYPE == T2LTypes.STRING) {
             return obj.STRING;
         } else if (obj.TYPE == T2LTypes.INT) {
@@ -342,6 +449,12 @@ public class T2LObject implements Cloneable{
         return STRING;
     }
 
+    /**
+     * Gets the list representation of the object to iterate over.
+     *
+     * @param executor Executor
+     * @return A list of objects
+     */
     public List<T2LObject> getIterable(Executor executor) {
         if (TYPE == T2LTypes.STRING) {
             String[] strs = STRING.split("");

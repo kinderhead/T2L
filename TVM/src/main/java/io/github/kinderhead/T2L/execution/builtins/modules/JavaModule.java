@@ -15,12 +15,34 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
+/**
+ * The default java module.
+ */
 public class JavaModule extends T2LModule {
+    /**
+     * Get the importable name of the module.
+     *
+     * @return The name
+     */
     @Override
     public String getName() {
         return "java";
     }
 
+    /**
+     * <code>java.from</code>: Returns a wrapper for a java object.<br>
+     * fqn, string: A fully qualified name of a class.<br>
+     * args, objects: All other arguments are used as constructor args.<br>
+     *
+     * Example:
+     * <pre>{@code
+     * obj = java.from("io.github.kinderhead.T2L.execution.builtins.TestObj", "argument");
+     * }</pre>
+     * @param executor Executor
+     * @param fqn Fully qualified name
+     * @param args Arguments
+     * @return The wrapped object
+     */
     @T2LFunction
     @T2LUnlimitedArgs
     public JavaInterface from(Executor executor, String fqn, T2LObject... args) {
@@ -61,12 +83,37 @@ public class JavaModule extends T2LModule {
         return null;
     }
 
+    /**
+     * <code>java.asArray</code>: Returns a <code>T2LObject[]</code> from an iterable.<br>
+     * obj, iterable: The iterable to convert.<br>
+     * Example:
+     * <pre>{@code
+     * obj = java.asArray([4, 1, 2]);
+     * }</pre>
+     * @param executor Executor
+     * @param obj Object to convert
+     * @return Array of objects
+     */
     @T2LFunction
     @T2LAsObject
     public Object[] asArray(Executor executor, T2LObject obj) {
         return obj.getIterable(executor).toArray();
     }
 
+    /**
+     * <code>java.asJava</code>: Returns a wrapper for the internal <code>T2LObject</code>.<br>
+     * obj, object: The object to wrap.<br>
+     * See {@link T2LObject} for api information.<br>
+     * Example:
+     * <pre>{@code
+     * obj = java.asJava("Hi");
+     * print(obj.clone()); # See API reference
+     * }</pre>
+     * @param executor Executor
+     * @param obj Object to wrap
+     * @return Wrapped object
+     * @see T2LObject
+     */
     @T2LFunction
     @T2LAsObject
     public JavaInterface asJava(Executor executor, T2LObject obj) {
