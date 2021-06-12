@@ -89,6 +89,12 @@ public interface t2lVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitImport_stat(t2lParser.Import_statContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link t2lParser#jimport_stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJimport_stat(t2lParser.Jimport_statContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link t2lParser#if_stat}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

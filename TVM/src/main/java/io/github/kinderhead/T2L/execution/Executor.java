@@ -63,7 +63,7 @@ public class Executor {
      * @see Instruction
      */
     public void runInsn(Instruction insn) {
-        CURRENT_LINE = Reader.INSTANCE.getLine(insn.getNumber());
+        CURRENT_LINE = Reader.INSTANCE.getLine(insn.getNumber() + 1);
         //System.out.println("Execution insn " + insn.getClass().getName() + " at env " + CURRENT_ENVIRONMENT);
         insn.execute(this);
     }

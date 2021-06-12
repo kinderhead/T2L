@@ -1,6 +1,7 @@
 package io.github.kinderhead.T2L.tvm;
 
 import io.github.kinderhead.T2L.execution.Executor;
+import io.github.kinderhead.T2L.execution.JavaClassInterface;
 import io.github.kinderhead.T2L.execution.Reader;
 import io.github.kinderhead.T2L.execution.T2LClass;
 import io.github.kinderhead.T2L.execution.T2LObject;
@@ -52,14 +53,15 @@ public class ClassInitInsn extends Instruction implements PassableInstruction {
         }
         Collections.reverse(objs);
 
-        T2LClass parent;
-        try {
-            parent = (T2LClass) Instruction.environmentGetErrorHandler(executor.CURRENT_ENVIRONMENT, NAME, executor);
-        } catch (ClassCastException e) {
-            parent = null;
+        T2LObject obj = Instruction.environmentGetErrorHandler(executor.CURRENT_ENVIRONMENT, NAME, executor);
+        if (obj instanceof T2LClass) {
+            return ((T2LClass) obj).instantiate(objs, NAME, executor.CURRENT_ENVIRONMENT, executor);
+        } else if (obj instanceof JavaClassInterface) {
+            return ((JavaClassInterface) obj).instantiate(objs, NAME, executor.CURRENT_ENVIRONMENT, executor);
+        } else {
             new ClassInitException().raise("Cannot instantiate non class variable " + NAME);
         }
-        assert parent != null;
-        return parent.instantiate(objs, NAME, executor.CURRENT_ENVIRONMENT, executor);
+
+        return null;
     }
 }

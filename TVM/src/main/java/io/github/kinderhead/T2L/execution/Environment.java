@@ -2,9 +2,11 @@ package io.github.kinderhead.T2L.execution;
 
 import io.github.kinderhead.T2L.execution.builtins.Bool;
 import io.github.kinderhead.T2L.execution.builtins.Import;
+import io.github.kinderhead.T2L.execution.builtins.JImport;
 import io.github.kinderhead.T2L.execution.builtins.Print;
 import io.github.kinderhead.T2L.execution.builtins.modules.JavaModule;
 import io.github.kinderhead.T2L.execution.builtins.modules.SystemModule;
+import io.github.kinderhead.T2L.execution.errors.TypeException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -32,6 +34,7 @@ public class Environment {
     private ArrayList<T2LModule> JAVA_MODULES = new ArrayList<>();
     public ArrayList<String> SEARCH_PATHS = new ArrayList<>();
     public Map<String, T2LObject> MODULES = new HashMap<>();
+    //public ArrayList<String> JARS = new ArrayList<>();
 
     /**
      * Creates an environment.
@@ -69,6 +72,7 @@ public class Environment {
         set(0, "false", new Bool(false), executor);
         set(0, "null", new T2LObject(), executor);
         set(0, "__import", new Import(0), executor);
+        set(0, "__jimport", new JImport(0), executor);
         //set(0, "list", new JavaInterface(new T2LList(), null));
     }
 
@@ -217,6 +221,30 @@ public class Environment {
     }
 
     /**
+     * Imports a java class to the environment.
+     *
+     * @param name The name
+     * @param executor Executor
+     * @return If it succeded
+     */
+    public boolean jImport(String name, Executor executor) {
+        Class cls = null;
+        try {
+            cls = Class.forName(name);
+        } catch (ClassNotFoundException e) {
+            new TypeException().raise("Cannot get class " + name, executor.CURRENT_LINE);
+        }
+
+        JavaClassInterface mod = new JavaClassInterface(cls, null, executor);
+
+        String mod_name = name.split("\\.")[name.split("\\.").length - 1];
+
+        set(executor.CURRENT_ENVIRONMENT, mod_name, mod, executor);
+
+        return false;
+    }
+
+    /**
      * Imports a file or builtin.
      *
      * @param name The name
@@ -287,7 +315,8 @@ public class Environment {
         new_executor.CODE = new Reader(new ArrayList<>(Arrays.asList(ArrayUtils.toObject(data)))).read();
         new_executor.execute();
 
-        T2LClass module = new T2LClass(ENVIRONMENTS.get(new_executor.CURRENT_ENVIRONMENT));
+        T2LClass module = new T2LClass();
+        module.build(ENVIRONMENTS.get(new_executor.CURRENT_ENVIRONMENT).OBJECTS);
         T2LClassObj obj = module.instantiate(new ArrayList<>(), mod_name, -1, executor);
         set(executor.CURRENT_ENVIRONMENT, mod_name, obj, executor);
         MODULES.put(mod_name, obj);

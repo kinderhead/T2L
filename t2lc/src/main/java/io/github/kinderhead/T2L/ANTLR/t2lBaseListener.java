@@ -172,6 +172,18 @@ public class t2lBaseListener implements t2lListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterJimport_stat(t2lParser.Jimport_statContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJimport_stat(t2lParser.Jimport_statContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIf_stat(t2lParser.If_statContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -1,5 +1,4 @@
-// Generated from C:/Users/Daniel/Documents/Java/T2L/t2lc/src/main/resources\t2l.g4 by ANTLR 4.9.1
-package io.github.kinderhead.T2L.ANTLR;
+// Generated from c:\Users\Daniel\Documents\Java\T2L\t2lc\src\main\resources\t2l.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class t2lParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.9.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -117,19 +116,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_start; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterStart(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitStart(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitStart(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final StartContext start() throws RecognitionException {
@@ -164,19 +150,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_block; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterBlock(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitBlock(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitBlock(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final BlockContext block() throws RecognitionException {
@@ -251,19 +224,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_stat; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterStat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitStat(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitStat(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final StatContext stat() throws RecognitionException {
@@ -377,19 +337,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_class_stat_block; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterClass_stat_block(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitClass_stat_block(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitClass_stat_block(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Class_stat_blockContext class_stat_block() throws RecognitionException {
@@ -447,19 +394,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_call_stat; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterCall_stat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitCall_stat(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitCall_stat(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Call_statContext call_stat() throws RecognitionException {
@@ -504,19 +438,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_func_stat; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterFunc_stat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitFunc_stat(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitFunc_stat(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Func_statContext func_stat() throws RecognitionException {
@@ -556,19 +477,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_t2l_return; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterT2l_return(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitT2l_return(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitT2l_return(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final T2l_returnContext t2l_return() throws RecognitionException {
@@ -620,19 +528,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_class_stat; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterClass_stat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitClass_stat(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitClass_stat(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Class_statContext class_stat() throws RecognitionException {
@@ -725,19 +620,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_params; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterParams(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitParams(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitParams(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ParamsContext params() throws RecognitionException {
@@ -802,19 +684,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_def_params; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterDef_params(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitDef_params(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitDef_params(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Def_paramsContext def_params() throws RecognitionException {
@@ -877,19 +746,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_var; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterVar(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitVar(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitVar(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final VarContext var() throws RecognitionException {
@@ -950,19 +806,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_index; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterIndex(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitIndex(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitIndex(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final IndexContext index() throws RecognitionException {
@@ -1006,19 +849,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_import_stat; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterImport_stat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitImport_stat(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitImport_stat(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Import_statContext import_stat() throws RecognitionException {
@@ -1054,19 +884,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_jimport_stat; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterJimport_stat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitJimport_stat(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitJimport_stat(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Jimport_statContext jimport_stat() throws RecognitionException {
@@ -1114,19 +931,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_if_stat; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterIf_stat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitIf_stat(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitIf_stat(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final If_statContext if_stat() throws RecognitionException {
@@ -1189,19 +993,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_elseIfStat; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterElseIfStat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitElseIfStat(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitElseIfStat(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ElseIfStatContext elseIfStat() throws RecognitionException {
@@ -1238,19 +1029,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_elseStat; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterElseStat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitElseStat(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitElseStat(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ElseStatContext elseStat() throws RecognitionException {
@@ -1287,19 +1065,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cond; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterCond(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitCond(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitCond(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final CondContext cond() throws RecognitionException {
@@ -1338,19 +1103,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_stat_block; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterStat_block(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitStat_block(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitStat_block(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Stat_blockContext stat_block() throws RecognitionException {
@@ -1413,19 +1165,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_while_stat; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterWhile_stat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitWhile_stat(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitWhile_stat(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final While_statContext while_stat() throws RecognitionException {
@@ -1467,19 +1206,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_for_loop_stat; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterFor_loop_stat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitFor_loop_stat(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitFor_loop_stat(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final For_loop_statContext for_loop_stat() throws RecognitionException {
@@ -1536,19 +1262,6 @@ public class t2lParser extends Parser {
 			return getToken(t2lParser.COMMA, i);
 		}
 		public DictionaryOpContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterDictionaryOp(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitDictionaryOp(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitDictionaryOp(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class ClassOpContext extends ExprContext {
 		public TerminalNode NEW() { return getToken(t2lParser.NEW, 0); }
@@ -1559,19 +1272,6 @@ public class t2lParser extends Parser {
 		}
 		public TerminalNode CPAR() { return getToken(t2lParser.CPAR, 0); }
 		public ClassOpContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterClassOp(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitClassOp(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitClassOp(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class ListOpContext extends ExprContext {
 		public TerminalNode OSQUARE() { return getToken(t2lParser.OSQUARE, 0); }
@@ -1587,19 +1287,6 @@ public class t2lParser extends Parser {
 			return getToken(t2lParser.COMMA, i);
 		}
 		public ListOpContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterListOp(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitListOp(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitListOp(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class FuncOpContext extends ExprContext {
 		public TerminalNode ID() { return getToken(t2lParser.ID, 0); }
@@ -1609,38 +1296,12 @@ public class t2lParser extends Parser {
 		}
 		public TerminalNode CPAR() { return getToken(t2lParser.CPAR, 0); }
 		public FuncOpContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterFuncOp(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitFuncOp(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitFuncOp(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class AtomOpContext extends ExprContext {
 		public AtomContext atom() {
 			return getRuleContext(AtomContext.class,0);
 		}
 		public AtomOpContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterAtomOp(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitAtomOp(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitAtomOp(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class MultiOpContext extends ExprContext {
 		public List<ExprContext> expr() {
@@ -1650,19 +1311,6 @@ public class t2lParser extends Parser {
 			return getRuleContext(ExprContext.class,i);
 		}
 		public MultiOpContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterMultiOp(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitMultiOp(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitMultiOp(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class ExprOpContext extends ExprContext {
 		public ExprContext left;
@@ -1689,19 +1337,6 @@ public class t2lParser extends Parser {
 		public TerminalNode AND() { return getToken(t2lParser.AND, 0); }
 		public TerminalNode OR() { return getToken(t2lParser.OR, 0); }
 		public ExprOpContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterExprOp(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitExprOp(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitExprOp(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class SingleOpContext extends ExprContext {
 		public Token op;
@@ -1711,19 +1346,6 @@ public class t2lParser extends Parser {
 		public TerminalNode MINUS() { return getToken(t2lParser.MINUS, 0); }
 		public TerminalNode NOT() { return getToken(t2lParser.NOT, 0); }
 		public SingleOpContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterSingleOp(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitSingleOp(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitSingleOp(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class IndexOpContext extends ExprContext {
 		public TerminalNode ID() { return getToken(t2lParser.ID, 0); }
@@ -1733,19 +1355,6 @@ public class t2lParser extends Parser {
 		}
 		public TerminalNode CSQUARE() { return getToken(t2lParser.CSQUARE, 0); }
 		public IndexOpContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterIndexOp(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitIndexOp(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitIndexOp(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExprContext expr() throws RecognitionException {
@@ -2110,19 +1719,6 @@ public class t2lParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_pair; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterPair(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitPair(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitPair(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final PairContext pair() throws RecognitionException {
@@ -2164,36 +1760,10 @@ public class t2lParser extends Parser {
 	public static class IDAtomContext extends AtomContext {
 		public TerminalNode ID() { return getToken(t2lParser.ID, 0); }
 		public IDAtomContext(AtomContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterIDAtom(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitIDAtom(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitIDAtom(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class StringAtomContext extends AtomContext {
 		public TerminalNode STRING() { return getToken(t2lParser.STRING, 0); }
 		public StringAtomContext(AtomContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterStringAtom(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitStringAtom(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitStringAtom(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class ParenAtomContext extends AtomContext {
 		public TerminalNode OPAR() { return getToken(t2lParser.OPAR, 0); }
@@ -2202,36 +1772,10 @@ public class t2lParser extends Parser {
 		}
 		public TerminalNode CPAR() { return getToken(t2lParser.CPAR, 0); }
 		public ParenAtomContext(AtomContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterParenAtom(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitParenAtom(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitParenAtom(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class IntAtomContext extends AtomContext {
 		public TerminalNode INT() { return getToken(t2lParser.INT, 0); }
 		public IntAtomContext(AtomContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).enterIntAtom(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof t2lListener ) ((t2lListener)listener).exitIntAtom(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof t2lVisitor ) return ((t2lVisitor<? extends T>)visitor).visitIntAtom(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AtomContext atom() throws RecognitionException {

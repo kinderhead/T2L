@@ -1,16 +1,4 @@
-import java;
-import system;
+import io;
 
-class foo {
-    x = 4;
-
-    func f "arg" {
-        return arg * 5;
-    }
-
-    class insider {
-        y = 5;
-    }
-}
-
-print(new foo().x);
+print(io.write("src/dist/stdlib/test.txt", "Hello"));
+print(io.read("src/dist/stdlib/test.txt"));

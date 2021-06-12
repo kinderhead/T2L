@@ -138,6 +138,16 @@ public interface t2lListener extends ParseTreeListener {
 	 */
 	void exitImport_stat(t2lParser.Import_statContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link t2lParser#jimport_stat}.
+	 * @param ctx the parse tree
+	 */
+	void enterJimport_stat(t2lParser.Jimport_statContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link t2lParser#jimport_stat}.
+	 * @param ctx the parse tree
+	 */
+	void exitJimport_stat(t2lParser.Jimport_statContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link t2lParser#if_stat}.
 	 * @param ctx the parse tree
 	 */

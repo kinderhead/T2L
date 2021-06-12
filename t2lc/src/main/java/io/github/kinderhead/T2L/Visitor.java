@@ -175,6 +175,12 @@ public class Visitor extends t2lBaseVisitor<IVisitorAST> {
     }
 
     @Override
+    public IVisitorAST visitJimport_stat(t2lParser.Jimport_statContext ctx) {
+        return new FunctionCallStat(ctx.getStart().getLine(), new ID(ctx.getStart().getLine(), "__jimport"),
+                new ArrayList<>(Collections.singletonList(new StringAST(ctx.ID().getSymbol().getLine(), ctx.ID().getText()))), false);
+    }
+
+    @Override
     public IVisitorAST visitFor_loop_stat(t2lParser.For_loop_statContext ctx) {
         return new ForLoopStat(ctx.getStart().getLine(), ctx.ID().getText(), visit(ctx.expr()), ((StatementGroup) visit(ctx.stat_block())).STATEMENTS);
     }

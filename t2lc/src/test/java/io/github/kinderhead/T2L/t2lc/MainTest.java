@@ -40,7 +40,9 @@ class MainTest {
             public void checkExit(int status)
             {
                 if (status != 0) {
-                    throw new SecurityException();
+                    SecurityException err = new SecurityException();
+                    err.setStackTrace(Main.STACK);
+                    throw err;
                 }
             }
 
@@ -52,7 +54,7 @@ class MainTest {
         Main.main(new String[]{"-o", "../lib/test.t2lc", "../lib/test.t2l"});
 
          */
-        Main.main(new String[]{"-i", "../src/dist/stdlib/test.t2lc", "-p", "../src/dist/stdlib"});
+        Main.main(new String[]{"-i", "../src/dist/stdlib/test.t2lc", "-p", "../src/dist/stdlib", "-j", "../out/t2lc.jar"});
 
         //io.github.kinderhead.T2L.tvm.Main.execute(Main.compile(String.join("\n", Files.readAllLines(Paths.get(getClass().getResource("/test.t2l").toURI()))), "out.t2lc"));
     }

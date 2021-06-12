@@ -3,7 +3,6 @@ package io.github.kinderhead.T2L.execution;
 import io.github.kinderhead.T2L.execution.builtins.T2LAsObject;
 import io.github.kinderhead.T2L.execution.builtins.T2LFunction;
 import io.github.kinderhead.T2L.execution.builtins.T2LIterable;
-import io.github.kinderhead.T2L.execution.builtins.T2LUnlimitedArgs;
 import io.github.kinderhead.T2L.execution.errors.AccessDeniedException;
 import io.github.kinderhead.T2L.execution.errors.CallableException;
 import io.github.kinderhead.T2L.execution.errors.InternalException;
@@ -15,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,9 +57,7 @@ public class JavaInterface extends T2LObject {
                     PARAMS.remove(0);
                 }
 
-                if (((Method) value).isAnnotationPresent(T2LUnlimitedArgs.class)) {
-                    UNLIMITED_PARAMS = true;
-                }
+                UNLIMITED_PARAMS = true;
             } else {
                 TYPE = T2LTypes.CUSTOM;
             }
@@ -74,7 +72,7 @@ public class JavaInterface extends T2LObject {
      * @param name The name
      * @return The field or null
      */
-    private Field getRawField(String name) {
+    Field getRawField(String name) {
         Field[] fields = VALUE.getClass().getFields();
         for (Field i : fields) {
             if (i.getName().equals(name)) {
@@ -109,7 +107,7 @@ public class JavaInterface extends T2LObject {
      * @param name The name
      * @return The method or null
      */
-    private Method getMethod(String name) {
+    Method getMethod(String name) {
         Method[] methods = VALUE.getClass().getMethods();
         for (Method i : methods) {
             if (i.getName().equals(name)) {
@@ -135,6 +133,14 @@ public class JavaInterface extends T2LObject {
      * @return The object
      */
     public static Object getSupposedValue(T2LObject obj, Class cls, Executor executor) {
+        if (obj == null) {
+            return null;
+        }
+
+        if (obj.isTypeEqual(new T2LObject())) {
+            return null;
+        }
+
         if (cls.isAssignableFrom(int.class) || cls.isAssignableFrom(Integer.class)) {
             return obj.getInt(executor);
         } else if (cls.isAssignableFrom(double.class) || cls.isAssignableFrom(Double.class)) {
@@ -158,6 +164,25 @@ public class JavaInterface extends T2LObject {
         } else {
             new TypeException().raise("Cannot create java object from " + obj.NAME + "@" + System.identityHashCode(obj) + " of type " + obj.TYPE, executor.CURRENT_LINE);
             return null;
+        }
+    }
+
+    /**
+     * Get all methods from object.
+     * If {@link JavaInterface#PARENT} is not null and {@link JavaInterface#VALUE} is {@link Method}
+     * get all methods of the parent. Otherwise return all methods in {@link JavaInterface#VALUE}.
+     *
+     * @return List of methods
+     */
+    public Method[] getAllMethods() {
+        if (VALUE instanceof Method && PARENT != null) {
+            if (PARENT instanceof Class) {
+                return ((Class) PARENT).getMethods();
+            } else {
+                return PARENT.getClass().getMethods();
+            }
+        } else {
+            return VALUE.getClass().getMethods();
         }
     }
 
@@ -220,7 +245,7 @@ public class JavaInterface extends T2LObject {
      * @param executor Executor
      * @return The finished object
      */
-    public Object ifArrayChangeType(Class cls, Object obj, Executor executor) {
+    public static Object ifArrayChangeType(Class cls, Object obj, Executor executor) {
         if (!cls.isArray()) {
             return obj;
         }
@@ -296,59 +321,82 @@ public class JavaInterface extends T2LObject {
     @Override
     public T2LObject run(T2LObject obj, List<T2LObject> params, Executor executor) {
         if (VALUE instanceof Method) {
+            Method[] methods;
+            if (PARENT == null) {
+                methods = new Method[]{((Method) VALUE)};
+            } else {
+                ArrayList<Method> builder = new ArrayList<>();
+                for (Method i : getAllMethods()) {
+                    if (i.getName().equals(((Method) VALUE).getName())) {
+                        builder.add(i);
+                    }
+                }
+                methods = builder.toArray(new Method[0]);
+            }
+
+            int mdex = 0;
             try {
-                Method method = (Method) VALUE;
-                Class[] method_params = method.getParameterTypes();
-                boolean annotation = method.isAnnotationPresent(T2LFunction.class);
-                boolean isAsObject = method.isAnnotationPresent(T2LAsObject.class);
-                ArrayList<Object> param = new ArrayList<>();
-                ArrayList<T2LObject> extraParams = new ArrayList<>();
+                for (Method method : methods) {
+                    try {
+                        Class[] method_params = method.getParameterTypes();
+                        boolean annotation = method.isAnnotationPresent(T2LFunction.class);
+                        boolean isAsObject = method.isAnnotationPresent(T2LAsObject.class);
+                        ArrayList<Object> param = new ArrayList<>();
+                        ArrayList<T2LObject> extraParams = new ArrayList<>();
 
-                int idex = 0;
-                int offset = 0;
-                if (annotation) {
-                    offset++;
-                }
-
-                boolean isExtra = false;
-                for (T2LObject i : params) {
-                    Class cls;
-                    if (ArrayUtils.isArrayIndexValid(method_params, offset)) {
-                        cls = method_params[offset];
-                    } else {
-                        cls = T2LObject[].class;
-                    }
-
-                    if (UNLIMITED_PARAMS && offset == method_params.length - 1 && cls.isAssignableFrom(T2LObject[].class)) {
-                        isExtra = true;
-                    }
-
-                    if (!isExtra) {
-                        if (isAsObject && method_params[offset].isAssignableFrom(T2LObject.class)) {
-                            param.add(i);
-                        } else {
-                            param.add(ifArrayChangeType(method_params[offset], getSupposedValue(i, cls, executor), executor));
+                        int idex = 0;
+                        int offset = 0;
+                        if (annotation) {
+                            offset++;
                         }
-                    } else {
-                        extraParams.add(i);
+
+                        boolean isExtra = false;
+                        for (T2LObject i : params) {
+                            Class cls;
+                            if (ArrayUtils.isArrayIndexValid(method_params, offset)) {
+                                cls = method_params[offset];
+                            } else {
+                                cls = T2LObject[].class;
+                            }
+
+                            if (UNLIMITED_PARAMS && offset == method_params.length - 1 && cls.isAssignableFrom(T2LObject[].class)) {
+                                isExtra = true;
+                            }
+
+                            if (!isExtra) {
+                                if (isAsObject && method_params[offset].isAssignableFrom(T2LObject.class)) {
+                                    param.add(i);
+                                } else {
+                                    param.add(ifArrayChangeType(method_params[offset], getSupposedValue(i, cls, executor), executor));
+                                }
+                            } else {
+                                extraParams.add(i);
+                            }
+                            idex++;
+                            offset++;
+                        }
+
+                        if (UNLIMITED_PARAMS && annotation) {
+                            param.add(extraParams.toArray(new T2LObject[0]));
+                        }
+
+                        if (annotation) {
+                            param.add(0, executor);
+                        }
+                        Object out = method.invoke(PARENT, param.toArray());
+                        if (out instanceof T2LObject) {
+                            return (T2LObject) out;
+                        }
+                        return new JavaInterface(out, null);
+                    } catch (Exception e) {
+                        if (mdex == methods.length - 1) {
+                            throw e;
+                        }
                     }
-                    idex++;
-                    offset++;
-                }
 
-                if (UNLIMITED_PARAMS) {
-                    param.add(extraParams.toArray(new T2LObject[0]));
+                    mdex++;
                 }
-
-                if (annotation) {
-                    param.add(0, executor);
-                }
-                Object out = method.invoke(PARENT, param.toArray());
-                if (out instanceof T2LObject) {
-                    return (T2LObject) out;
-                }
-                return new JavaInterface(out, null);
-            } catch (IllegalAccessException | IllegalArgumentException e) {
+            } catch (IllegalArgumentException | IllegalAccessException e) {
                 new CallableException().raise("Error running java object " + VALUE.getClass().getName() + "@" + System.identityHashCode(VALUE), executor.CURRENT_LINE);
             } catch (InvocationTargetException e) {
                 Throwable err = e.getCause();
@@ -356,6 +404,12 @@ public class JavaInterface extends T2LObject {
                     ((T2LError) err).run();
                 } else {
                     new InternalException(e).raise("Internal exception occured", executor.CURRENT_LINE);
+                }
+            } catch (Exception err) {
+                if (err instanceof T2LError) {
+                    ((T2LError) err).run();
+                } else {
+                    new InternalException(err).raise("Internal exception occured", executor.CURRENT_LINE);
                 }
             }
         }
@@ -380,6 +434,20 @@ public class JavaInterface extends T2LObject {
 
                 }
             }
+        }
+        
+        if (VALUE instanceof Collection) {
+            ArrayList<T2LObject> out = new ArrayList<>();
+            for (Object i : ((Collection<?>) VALUE)) {
+                out.add(new JavaInterface(i, null));
+            }
+            return out;
+        } else if (VALUE.getClass().isArray()) {
+            ArrayList<T2LObject> out = new ArrayList<>();
+            for (Object i : ((Object[]) VALUE)) {
+                out.add(new JavaInterface(i, null));
+            }
+            return out;
         }
 
         return super.getIterable(executor);

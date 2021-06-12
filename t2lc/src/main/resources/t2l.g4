@@ -15,6 +15,7 @@ stat
     | index
     | for_loop_stat
     | import_stat
+    | jimport_stat
     ;
 
 class_stat_block
@@ -58,6 +59,10 @@ index
 
 import_stat
     : IMPORT ID SCOL
+    ;
+
+jimport_stat
+    : JIMPORT ID SCOL
     ;
 
 if_stat
@@ -156,6 +161,7 @@ T2L_RETURN : 'return';
 CLASS : 'class';
 NEW : 'new';
 IMPORT : 'import';
+JIMPORT : 'jimport';
 
 ID
  : [a-zA-Z_] [a-zA-Z_0-9]*
