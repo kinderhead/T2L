@@ -4,6 +4,5 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/wiki" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/wiki/T2L.wiki" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/wiki/gh-pages" vcs="Git" />
   </component>
 </project>
