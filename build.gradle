@@ -18,6 +18,17 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
+def exportedProjects = [
+        ":t2lc",
+        ":TVM"
+]
+
+task generateApiDocs(type: Javadoc) {
+    source exportedProjects.collect { project(it).sourceSets.main.allJava }
+    classpath = files(exportedProjects.collect { project(it).sourceSets.main.compileClasspath })
+    destinationDir = reporting.file("docs")
+}
+
 test {
     useJUnitPlatform()
 }

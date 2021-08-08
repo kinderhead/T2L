@@ -1,7 +1,8 @@
 import doc;
 jimport java.io.File;
 
-"""Prints the argument
+"""Prints the argument.
+Does nothing else.
 
 Parameters
 ----------
