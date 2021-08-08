@@ -6,6 +6,7 @@ import io.github.kinderhead.T2L.execution.T2LError;
 import io.github.kinderhead.T2L.execution.T2LModule;
 import io.github.kinderhead.T2L.execution.T2LObject;
 import io.github.kinderhead.T2L.execution.builtins.T2LAsObject;
+import io.github.kinderhead.T2L.execution.builtins.T2LExtraParams;
 import io.github.kinderhead.T2L.execution.builtins.T2LFunction;
 import io.github.kinderhead.T2L.execution.errors.CallableException;
 import io.github.kinderhead.T2L.execution.errors.TypeException;
@@ -29,6 +30,7 @@ public class JavaModule extends T2LModule {
     }
 
     @T2LFunction
+    @T2LExtraParams
     public JavaInterface _fromClass(Executor executor, Class cls, String fqn, T2LObject... args) {
         if (cls.isEnum()) {
 
@@ -79,6 +81,7 @@ public class JavaModule extends T2LModule {
      * @return The wrapped object
      */
     @T2LFunction
+    @T2LExtraParams
     public JavaInterface from(Executor executor, String fqn, T2LObject... args) {
         Class cls = null;
         try {

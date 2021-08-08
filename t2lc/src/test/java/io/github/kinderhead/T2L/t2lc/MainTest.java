@@ -41,13 +41,16 @@ class MainTest {
             {
                 if (status != 0) {
                     SecurityException err = new SecurityException();
-                    err.setStackTrace(Main.STACK);
+                    if (Main.STACK != null) {
+                        err.setStackTrace(Main.STACK);
+                    }
                     throw err;
                 }
             }
 
         });
 
+        io.github.kinderhead.T2L.t2lc.Main.main(new String[]{"-d", "-m", "-o", "../src/dist/stdlib/", "-i", "../src/main/t2l/"});
         io.github.kinderhead.T2L.t2lc.Main.main(new String[]{"-i", "../src/test/t2l/test.t2l", "-o", "../src/dist/stdlib/test.t2lc"});
         /*
         Main.main(new String[]{"-o", "../lib/core.t2lm", "../lib/core.t2l"});

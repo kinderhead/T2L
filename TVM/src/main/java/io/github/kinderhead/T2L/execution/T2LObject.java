@@ -343,7 +343,13 @@ public class T2LObject implements Cloneable {
             name = name.split("\\.", 3)[0];
         }
 
-        return rawGet(name).getObjFromProperties(rest, false);
+        T2LObject ret = rawGet(name);
+
+        if (ret == null) {
+            return null;
+        }
+
+        return ret.getObjFromProperties(rest, false);
     }
 
     /**

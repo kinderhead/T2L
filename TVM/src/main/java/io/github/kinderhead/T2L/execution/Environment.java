@@ -1,6 +1,7 @@
 package io.github.kinderhead.T2L.execution;
 
 import io.github.kinderhead.T2L.execution.builtins.Bool;
+import io.github.kinderhead.T2L.execution.builtins.Help;
 import io.github.kinderhead.T2L.execution.builtins.Import;
 import io.github.kinderhead.T2L.execution.builtins.JImport;
 import io.github.kinderhead.T2L.execution.builtins.Print;
@@ -8,7 +9,10 @@ import io.github.kinderhead.T2L.execution.builtins.modules.JavaModule;
 import io.github.kinderhead.T2L.execution.builtins.modules.SystemModule;
 import io.github.kinderhead.T2L.execution.errors.TypeException;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,6 +72,7 @@ public class Environment {
      */
     public void populateBase(Executor executor) {
         set(0, "print", new Print(0), executor);
+        set(0, "help", new Help(0), executor);
         set(0, "true", new Bool(true), executor);
         set(0, "false", new Bool(false), executor);
         set(0, "null", new T2LObject(), executor);
@@ -250,8 +255,8 @@ public class Environment {
      * @param name The name
      * @param executor executor
      */
-    public void importFile(String name, Executor executor) {
-        importFile(name, executor, true);
+    public T2LObject importFile(String name, Executor executor) {
+        return importFile(name, executor, true).getKey();
     }
 
     /**
@@ -262,23 +267,31 @@ public class Environment {
      * @param err Is it the first recursion?
      * @return If is succeded
      */
-    public boolean importFile(String name, Executor executor, boolean err) {
-        name = name.replace(".", "/");
-        File file = new File(name + ".t2lm");
-        String mod_name = new File(name).getName();
+    public Pair<T2LObject, Boolean> importFile(String name, Executor executor, boolean err) {
+        if (!(name.contains("/") || name.contains("\\"))) {
+            name = name.replace(".", "/");
+        }
+        File file;
+        if (!(name.endsWith(".t2lm") || name.endsWith(".t2ll"))) {
+            file = new File(name + ".t2lm");
+        } else {
+            file = new File(name);
+        }
+        String mod_name = FilenameUtils.removeExtension(file.getName());
 
         if (err) {
             for (Map.Entry<String, T2LObject> entry : MODULES.entrySet()) {
                 if (entry.getKey().equals(mod_name)) {
                     set(executor.CURRENT_ENVIRONMENT, mod_name, entry.getValue(), executor);
-                    return true;
+                    return new ImmutablePair(entry.getValue(), true);
                 }
             }
 
             for (T2LModule mod : JAVA_MODULES) {
                 if (mod.getName().equals(mod_name)) {
-                    set(executor.CURRENT_ENVIRONMENT, mod_name, new JavaInterface(mod, null), executor);
-                    return true;
+                    JavaInterface ret = new JavaInterface(mod, null);
+                    set(executor.CURRENT_ENVIRONMENT, mod_name, ret, executor);
+                    return new ImmutablePair(ret, true);
                 }
             }
         }
@@ -289,25 +302,25 @@ public class Environment {
                 data = FileUtils.readFileToByteArray(file);
             } catch (IOException e) {
                 new io.github.kinderhead.T2L.execution.errors.IOException().raise("Could not import " + name, executor.CURRENT_LINE);
-                return false;
+                return new ImmutablePair(null, false);
             }
         } else {
             if (err) {
-                if (importFile("lib." + name, executor, false)) {
-                    return true;
+                if (importFile("lib." + name, executor, false).getValue()) {
+                    return new ImmutablePair(null, true);
                 }
 
                 for (String i : SEARCH_PATHS) {
                     Path path = Paths.get(i, name);
-                    if (importFile(path.toString(), executor, false)) {
-                        return true;
+                    if (importFile(path.toString(), executor, false).getValue()) {
+                        return new ImmutablePair(null, true);
                     }
                 }
             } else {
-                return false;
+                return new ImmutablePair(null, false);
             }
             new io.github.kinderhead.T2L.execution.errors.IOException().raise("Cannot find module with name " + name, executor.CURRENT_LINE);
-            return false;
+            return new ImmutablePair(null, false);
         }
 
         Executor new_executor = new Executor(executor.ENVIRONMENT);
@@ -320,7 +333,6 @@ public class Environment {
         T2LClassObj obj = module.instantiate(new ArrayList<>(), mod_name, -1, executor);
         set(executor.CURRENT_ENVIRONMENT, mod_name, obj, executor);
         MODULES.put(mod_name, obj);
-        // ee
-        return true;
+        return new ImmutablePair(obj, true);
     }
 }

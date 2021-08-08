@@ -1,6 +1,7 @@
 package io.github.kinderhead.T2L.execution;
 
 import io.github.kinderhead.T2L.execution.builtins.T2LAsObject;
+import io.github.kinderhead.T2L.execution.builtins.T2LExtraParams;
 import io.github.kinderhead.T2L.execution.builtins.T2LFunction;
 import io.github.kinderhead.T2L.execution.builtins.T2LIterable;
 import io.github.kinderhead.T2L.execution.errors.AccessDeniedException;
@@ -376,7 +377,7 @@ public class JavaInterface extends T2LObject {
                             offset++;
                         }
 
-                        if (UNLIMITED_PARAMS && annotation) {
+                        if (UNLIMITED_PARAMS && method.isAnnotationPresent(T2LExtraParams.class)) {
                             param.add(extraParams.toArray(new T2LObject[0]));
                         }
 

@@ -1,4 +1,13 @@
-import io;
+import doc;
+jimport java.io.File;
 
-print(io.write("src/dist/stdlib/test.txt", "Hello"));
-print(io.read("src/dist/stdlib/test.txt"));
+"""Prints the argument
+
+Parameters
+----------
+arg, object: The argument"""
+func test "arg" {
+    print(arg);
+}
+
+doc.main(["../src/dist/stdlib/doc.t2lm", "../src/dist/stdlib/doc.md"]);

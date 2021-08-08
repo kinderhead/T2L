@@ -114,7 +114,11 @@ public class Visitor extends t2lBaseVisitor<IVisitorAST> {
 
     @Override
     public IVisitorAST visitFunc_stat(t2lParser.Func_statContext ctx) {
-        return new FunctionDefStat(ctx.getStart().getLine(), new ID(ctx.ID().getSymbol().getLine(), ctx.ID().getText()), ((ParameterGroup) visit(ctx.def_params())), ((StatementGroup) visit(ctx.stat_block())));
+        if (ctx.DOC() == null) {
+            return new FunctionDefStat(ctx.getStart().getLine(), new ID(ctx.ID().getSymbol().getLine(), ctx.ID().getText()), ((ParameterGroup) visit(ctx.def_params())), ((StatementGroup) visit(ctx.stat_block())));
+        } else {
+            return new FunctionDefStat(ctx.getStart().getLine(), new ID(ctx.ID().getSymbol().getLine(), ctx.ID().getText()), ((ParameterGroup) visit(ctx.def_params())), ((StatementGroup) visit(ctx.stat_block())), ctx.DOC().getText().substring(3, ctx.DOC().getText().length()-3));
+        }
     }
 
     @Override

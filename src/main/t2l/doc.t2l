@@ -1,0 +1,10 @@
+import system;
+jimport java.io.File;
+
+func main "args" {
+    print(import_name(args[0]));
+}
+
+func import_name "name" {
+    return __import(name);
+}

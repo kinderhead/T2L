@@ -17,8 +17,6 @@ public class Import extends Function {
     public T2LObject run(T2LObject obj, List<T2LObject> params, Executor executor) {
         T2LObject file = params.get(0);
 
-        executor.ENVIRONMENT.importFile(file.getString(executor), executor);
-
-        return new T2LObject();
+        return executor.ENVIRONMENT.importFile(file.getString(executor), executor);
     }
 }

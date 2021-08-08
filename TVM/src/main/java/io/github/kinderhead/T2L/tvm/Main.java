@@ -97,6 +97,9 @@ public class Main {
                 throw e.SOURCE;
             }
             System.exit(1);
+        } catch (Throwable e) { // Catch everything except NPE for some reason
+            Log.Error("An internal error has occured on line " + executor.CURRENT_LINE);
+            throw e;
         }
     }
 }

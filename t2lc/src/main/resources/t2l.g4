@@ -29,7 +29,7 @@ call_stat
     ;
 
 func_stat
-    : FUNC ID def_params stat_block
+    : (DOC)? FUNC ID def_params stat_block
     ;
 
 t2l_return
@@ -175,6 +175,10 @@ INT
  | '-'[0-9]+
  | '-'[0-9]+ '.' [0-9]* 
  | '-.' [0-9]+
+ ;
+
+DOC
+ : '"""' (~["])* '"""'
  ;
 
 STRING
