@@ -16,7 +16,6 @@ public class Import extends Function {
     @Override
     public T2LObject run(T2LObject obj, List<T2LObject> params, Executor executor) {
         T2LObject file = params.get(0);
-
         return executor.ENVIRONMENT.importFile(file.getString(executor), executor);
     }
 }

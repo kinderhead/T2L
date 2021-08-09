@@ -332,6 +332,7 @@ public class Environment {
         module.build(ENVIRONMENTS.get(new_executor.CURRENT_ENVIRONMENT).OBJECTS);
         T2LClassObj obj = module.instantiate(new ArrayList<>(), mod_name, -1, executor);
         set(executor.CURRENT_ENVIRONMENT, mod_name, obj, executor);
+        obj.NAME = mod_name;
         MODULES.put(mod_name, obj);
         return new ImmutablePair(obj, true);
     }
