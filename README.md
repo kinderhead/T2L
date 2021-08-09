@@ -1,3 +1,5 @@
+![Github Actions](https://img.shields.io/github/workflow/status/kinderhead/T2L/Java%20CI%20with%20Gradle?style=plastic)
+
 # Installing
 
 First download and open with intellij.
