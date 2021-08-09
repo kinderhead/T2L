@@ -29,3 +29,21 @@ jobs:
       run: ./gradlew assembleDist
     - name: Python build script
       run: python3 build.py
+    - name: Artifact 1
+      uses: actions/upload-artifact@v2
+      with:
+        name: t2lc.jar
+        path: out/t2lc.jar
+        retention-days: 5
+    - name: Artifact 2
+      uses: actions/upload-artifact@v2
+      with:
+        name: tvm.jar
+        path: out/tvm.jar
+        retention-days: 5
+    - name: stdlib
+      uses: actions/upload-artifact@v2
+      with:
+        name: stdlib
+        path: out/stdlib
+        retention-days: 5
