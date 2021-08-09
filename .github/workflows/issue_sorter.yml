@@ -24,6 +24,6 @@ jobs:
       - name: Move issues to project
         uses: alex-page/github-project-automation-plus@v0.8.1
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.PROJECT_TOKEN }}
           project: Planned features
           column: To do
