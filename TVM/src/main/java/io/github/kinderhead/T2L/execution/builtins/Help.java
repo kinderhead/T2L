@@ -3,6 +3,7 @@ package io.github.kinderhead.T2L.execution.builtins;
 import io.github.kinderhead.T2L.execution.Executor;
 import io.github.kinderhead.T2L.execution.Function;
 import io.github.kinderhead.T2L.execution.T2LObject;
+import io.github.kinderhead.T2L.execution.T2LObjectFactory;
 
 import java.util.List;
 
@@ -16,11 +17,12 @@ public class Help extends Function {
     @Override
     public T2LObject run(T2LObject obj, List<T2LObject> params, Executor executor) {
         T2LObject param = params.get(0);
+        String out;
         if (param.rawContains("__doc")) {
-            System.out.println(param.get("__doc").getString(executor));
+            out = param.get("__doc").getString(executor);
         } else {
-            System.out.println("No documentation for object");
+            out = "";
         }
-        return new T2LObject();
+        return T2LObjectFactory.createString(out);
     }
 }

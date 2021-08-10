@@ -1,10 +1,32 @@
 import system;
-jimport java.io.File;
+import string;
 
 func main "args" {
-    print(import_name(args[0]));
+    mod = importName(args[0]);
+    props = system.getProperties(mod);
+    for set in props {
+        print(string.split(getDoc(set.value), "\n"));
+    }
 }
 
-func import_name "name" {
+"""Loads a module by name.
+
+Parameters
+----------
+name, string: The name or path of the module
+
+returns object: The loaded module"""
+func importName "name" {
     return __import(name);
+}
+
+"""Gets the documentation from an object
+
+Parameters
+----------
+obj, object: The object search
+
+returns string: The documentation"""
+func getDoc "obj" {
+    return help(obj);
 }

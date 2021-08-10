@@ -5,6 +5,13 @@ import io.github.kinderhead.T2L.tvm.Instruction;
 import java.util.List;
 
 public class Function extends T2LObject {
+
+    /**
+     * Creates a function object.
+     * @deprecated Creating a function without defining {@link Function#ENV} will cause environment stack issues.
+     *  Use {@link Function#Function(int)} instead.
+     */
+    @Deprecated
     public Function() {
         TYPE = T2LTypes.FUNCTION;
     }

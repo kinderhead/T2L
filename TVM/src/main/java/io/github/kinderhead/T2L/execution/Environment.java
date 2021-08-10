@@ -6,6 +6,7 @@ import io.github.kinderhead.T2L.execution.builtins.Import;
 import io.github.kinderhead.T2L.execution.builtins.JImport;
 import io.github.kinderhead.T2L.execution.builtins.Print;
 import io.github.kinderhead.T2L.execution.builtins.modules.JavaModule;
+import io.github.kinderhead.T2L.execution.builtins.modules.StringModule;
 import io.github.kinderhead.T2L.execution.builtins.modules.SystemModule;
 import io.github.kinderhead.T2L.execution.errors.TypeException;
 import org.apache.commons.io.FileUtils;
@@ -52,6 +53,7 @@ public class Environment {
         ENVIRONMENTS.put(0, new LocalEnvironment());
         registerModule(new JavaModule());
         registerModule(new SystemModule());
+        registerModule(new StringModule());
     }
 
     /**
@@ -241,6 +243,7 @@ public class Environment {
         }
 
         JavaClassInterface mod = new JavaClassInterface(cls, null, executor);
+        mod.WAS_IMPORTED = true;
 
         String mod_name = name.split("\\.")[name.split("\\.").length - 1];
 
@@ -290,6 +293,7 @@ public class Environment {
             for (T2LModule mod : JAVA_MODULES) {
                 if (mod.getName().equals(mod_name)) {
                     JavaInterface ret = new JavaInterface(mod, null);
+                    ret.WAS_IMPORTED = true;
                     set(executor.CURRENT_ENVIRONMENT, mod_name, ret, executor);
                     return new ImmutablePair(ret, true);
                 }
@@ -333,6 +337,7 @@ public class Environment {
         T2LClassObj obj = module.instantiate(new ArrayList<>(), mod_name, -1, executor);
         set(executor.CURRENT_ENVIRONMENT, mod_name, obj, executor);
         obj.NAME = mod_name;
+        obj.WAS_IMPORTED = true;
         MODULES.put(mod_name, obj);
         return new ImmutablePair(obj, true);
     }

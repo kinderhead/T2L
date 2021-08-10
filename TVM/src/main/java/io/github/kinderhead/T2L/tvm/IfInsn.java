@@ -60,7 +60,7 @@ public class IfInsn extends Instruction {
     public void execute(Executor executor) {
         T2LObject expr = executor.ENVIRONMENT.pop();
         if (expr.isTrue()) {
-            Function body_func = new Function();
+            Function body_func = new Function(executor.CURRENT_ENVIRONMENT);
             body_func.CODE = INSNS;
             body_func.run(null, new ArrayList<>(), executor);
         } else {
@@ -68,7 +68,7 @@ public class IfInsn extends Instruction {
                 for (Instruction i : ELSEIF_INSNS) {
                     ElseIfInsn obj = (ElseIfInsn) i;
                     if (obj.eval(executor).isTrue()) {
-                        Function body_func = new Function();
+                        Function body_func = new Function(executor.CURRENT_ENVIRONMENT);
                         body_func.CODE = obj.INSNS;
                         body_func.run(null, new ArrayList<>(), executor);
                         return;
@@ -77,7 +77,7 @@ public class IfInsn extends Instruction {
             }
 
             if (ELSE_INSNS != null) {
-                Function body_func = new Function();
+                Function body_func = new Function(executor.CURRENT_ENVIRONMENT);
                 body_func.CODE = ELSE_INSNS;
                 body_func.run(null, new ArrayList<>(), executor);
             }

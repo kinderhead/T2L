@@ -24,6 +24,7 @@ public class T2LObject implements Cloneable {
 
     public T2LTypes TYPE;
     public int ENV = 0;
+    public boolean WAS_IMPORTED;
 
     public String STRING = "";
     public double NUMBER = 0;

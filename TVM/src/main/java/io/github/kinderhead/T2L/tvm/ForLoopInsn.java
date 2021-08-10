@@ -39,7 +39,7 @@ public class ForLoopInsn extends Instruction {
     public void execute(Executor executor) {
         T2LObject expr = executor.ENVIRONMENT.pop();
 
-        Function func = new Function();
+        Function func = new Function(executor.CURRENT_ENVIRONMENT);
         func.CODE = INSNS;
         func.PARAMS = new ArrayList<>(Collections.singletonList(NAME));
 

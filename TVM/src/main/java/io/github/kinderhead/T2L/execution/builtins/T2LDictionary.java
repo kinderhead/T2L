@@ -2,11 +2,13 @@ package io.github.kinderhead.T2L.execution.builtins;
 
 import io.github.kinderhead.T2L.execution.Executor;
 import io.github.kinderhead.T2L.execution.T2LObject;
+import io.github.kinderhead.T2L.execution.T2LTypes;
 import io.github.kinderhead.T2L.execution.errors.ParameterException;
 import io.github.kinderhead.T2L.execution.errors.ValueMissingException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class T2LDictionary {
@@ -59,5 +61,19 @@ public class T2LDictionary {
         builder.deleteCharAt(builder.lastIndexOf(" "));
         builder.append(" }");
         return builder.toString();
+    }
+
+    @T2LIterable
+    public List<T2LObject> iter(Executor executor) {
+        ArrayList<T2LObject> objs = new ArrayList<>();
+
+        for (Map.Entry<T2LObject, T2LObject> i: data.entrySet()) {
+            T2LObject set = new T2LObject(T2LTypes.CUSTOM);
+            set.set("key", i.getKey(), executor);
+            set.set("value", i.getValue(), executor);
+            objs.add(set);
+        }
+
+        return objs;
     }
 }
