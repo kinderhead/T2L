@@ -39,7 +39,6 @@ public class Environment {
     private ArrayList<T2LModule> JAVA_MODULES = new ArrayList<>();
     public ArrayList<String> SEARCH_PATHS = new ArrayList<>();
     public Map<String, T2LObject> MODULES = new HashMap<>();
-    //public ArrayList<String> JARS = new ArrayList<>();
 
     /**
      * Creates an environment.
@@ -286,7 +285,7 @@ public class Environment {
             for (Map.Entry<String, T2LObject> entry : MODULES.entrySet()) {
                 if (entry.getKey().equals(mod_name)) {
                     set(executor.CURRENT_ENVIRONMENT, mod_name, entry.getValue(), executor);
-                    return new ImmutablePair(entry.getValue(), true);
+                    return new ImmutablePair<>(entry.getValue(), true);
                 }
             }
 
@@ -295,7 +294,7 @@ public class Environment {
                     JavaInterface ret = new JavaInterface(mod, null);
                     ret.WAS_IMPORTED = true;
                     set(executor.CURRENT_ENVIRONMENT, mod_name, ret, executor);
-                    return new ImmutablePair(ret, true);
+                    return new ImmutablePair<>(ret, true);
                 }
             }
         }
@@ -306,28 +305,28 @@ public class Environment {
                 data = FileUtils.readFileToByteArray(file);
             } catch (IOException e) {
                 new io.github.kinderhead.T2L.execution.errors.IOException().raise("Could not import " + name, executor.CURRENT_LINE);
-                return new ImmutablePair(null, false);
+                return new ImmutablePair<>(null, false);
             }
         } else {
             if (err) {
                 if (importFile("lib." + name, executor, false).getValue()) {
-                    return new ImmutablePair(null, true);
+                    return new ImmutablePair<>(null, true);
                 }
 
                 for (String i : SEARCH_PATHS) {
                     Path path = Paths.get(i, name);
                     if (importFile(path.toString(), executor, false).getValue()) {
-                        return new ImmutablePair(null, true);
+                        return new ImmutablePair<>(null, true);
                     }
                 }
             } else {
-                return new ImmutablePair(null, false);
+                return new ImmutablePair<>(null, false);
             }
             new io.github.kinderhead.T2L.execution.errors.IOException().raise("Cannot find module with name " + name, executor.CURRENT_LINE);
-            return new ImmutablePair(null, false);
+            return new ImmutablePair<>(null, false);
         }
 
-        Executor new_executor = new Executor(executor.ENVIRONMENT);
+        Executor new_executor = new Executor(executor.ENVIRONMENT, executor);
         new_executor.CURRENT_ENVIRONMENT = newEnvironment(executor.CURRENT_ENVIRONMENT);
         new_executor.CODE = new Reader(new ArrayList<>(Arrays.asList(ArrayUtils.toObject(data)))).read();
         new_executor.execute();
@@ -339,6 +338,6 @@ public class Environment {
         obj.NAME = mod_name;
         obj.WAS_IMPORTED = true;
         MODULES.put(mod_name, obj);
-        return new ImmutablePair(obj, true);
+        return new ImmutablePair<>(obj, true);
     }
 }

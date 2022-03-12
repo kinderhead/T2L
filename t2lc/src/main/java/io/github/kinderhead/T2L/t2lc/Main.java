@@ -111,7 +111,7 @@ public class Main {
             }
             if (cmd.hasOption("d")) {
                 codes.put(p, ret);
-                System.out.println("Compiling file " + path + p + ".t2l");
+                //System.out.println("Compiling file " + path + p + ".t2l");
             } else {
                 codes.put(out, ret);
             }

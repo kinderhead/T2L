@@ -84,8 +84,7 @@ public class Main {
                 jurls.getClass().getClassLoader()
         );
 
-        Reader.INSTANCE = new Reader(code);
-        Executor executor = new Executor(Reader.INSTANCE);
+        Executor executor = new Executor(new Reader(code));
         executor.ENVIRONMENT.SEARCH_PATHS.addAll(paths);
         try {
             executor.execute();

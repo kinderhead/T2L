@@ -39,7 +39,7 @@ public class ClassInsn extends Instruction {
 
     @Override
     public void execute(Executor executor) {
-        Executor new_executor = new Executor(executor.ENVIRONMENT);
+        Executor new_executor = new Executor(executor.ENVIRONMENT, executor);
         new_executor.CURRENT_ENVIRONMENT = executor.ENVIRONMENT.newEnvironment(executor.CURRENT_ENVIRONMENT);
 
         for (Instruction i : RUNTIME_BODY) {

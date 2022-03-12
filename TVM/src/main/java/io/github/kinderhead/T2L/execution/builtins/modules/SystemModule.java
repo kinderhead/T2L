@@ -37,11 +37,11 @@ public class SystemModule extends T2LModule {
     }
 
     /**
-     *
+     * Get all properties of the object in a dictionary.
      *
      * @param executor Executor
      * @param obj The object
-     * @return All properties of the object in a dictionary
+     * @return Dictionary
      */
     @T2LFunction
     public T2LObject getProperties(Executor executor, T2LObject obj) {

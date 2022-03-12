@@ -264,7 +264,6 @@ public class JavaInterface extends T2LObject {
 
     /**
      * The raw method to get an object. Overload this method for custom property functionality.
-     * overloading the property getter.
      *
      * @param name The name
      * @return The object

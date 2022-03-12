@@ -37,9 +37,9 @@ public class Executor {
      * @param env The environment
      * @see Environment
      */
-    public Executor(Environment env) {
+    public Executor(Environment env, Executor executor) {
         ENVIRONMENT = env;
-        READER = null;
+        READER = executor.READER;
     }
 
     /**
@@ -63,7 +63,7 @@ public class Executor {
      * @see Instruction
      */
     public void runInsn(Instruction insn) {
-        CURRENT_LINE = Reader.INSTANCE.getLine(insn.getNumber() + 1);
+        CURRENT_LINE = READER.getLine(insn.getNumber() + 1);
         //System.out.println("Execution insn " + insn.getClass().getName() + " at env " + CURRENT_ENVIRONMENT);
         insn.execute(this);
     }

@@ -24,7 +24,7 @@ public class Function extends T2LObject {
 
     @Override
     public T2LObject run(T2LObject obj, List<T2LObject> params, Executor executor) {
-        Executor new_executor = new Executor(executor.ENVIRONMENT);
+        Executor new_executor = new Executor(executor.ENVIRONMENT, executor);
         new_executor.CURRENT_ENVIRONMENT = executor.ENVIRONMENT.newEnvironment(ENV);
 
         int idex = 0;

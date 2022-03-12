@@ -1,9 +1,17 @@
 package io.github.kinderhead.T2L.t2lc;
 
+import io.github.kinderhead.T2L.api.T2LApi;
 import io.github.kinderhead.T2L.tvm.Main;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.Permission;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 class MainTest {
     /*
@@ -29,35 +37,16 @@ class MainTest {
 
     @Test
     void runFile() throws Throwable {
-        System.setSecurityManager(new SecurityManager() {
-
-            @Override
-            public void checkPermission(Permission perm)
-            {
-            }
-
-            @Override
-            public void checkExit(int status)
-            {
-                if (status != 0) {
-                    SecurityException err = new SecurityException();
-                    if (Main.STACK != null) {
-                        err.setStackTrace(Main.STACK);
-                    }
-                    throw err;
-                }
-            }
-
-        });
-
         io.github.kinderhead.T2L.t2lc.Main.main(new String[]{"-d", "-m", "-o", "../src/dist/stdlib/", "-i", "../src/main/t2l/"});
-        io.github.kinderhead.T2L.t2lc.Main.main(new String[]{"-i", "../src/test/t2l/test.t2l", "-o", "../src/dist/stdlib/test.t2lc"});
-        /*
-        Main.main(new String[]{"-o", "../lib/core.t2lm", "../lib/core.t2l"});
-        Main.main(new String[]{"-o", "../lib/test.t2lc", "../lib/test.t2l"});
+        //io.github.kinderhead.T2L.t2lc.Main.main(new String[]{"-i", "../src/test/t2l/test.t2l", "-o", "../src/dist/stdlib/test.t2lc"});
 
-         */
-        Main.main(new String[]{"-i", "../src/dist/stdlib/test.t2lc", "-p", "../src/dist/stdlib", "-j", "../out/t2lc.jar"});
+        //Main.main(new String[]{"-i", "../src/dist/stdlib/test.t2lc", "-p", "../src/dist/stdlib", "-j", "../out/t2lc.jar"});
+        T2LApi t2l = new T2LApi();
+        t2l.linkJars(new ArrayList<>(Collections.singleton("../out/t2lc.jar")));
+        t2l.loadCode(FileUtils.readFileToString(new File("../src/test/t2l/test.t2l"), StandardCharsets.UTF_8));
+        t2l.execute();
+
+        t2l.run("test", "hello");
 
         //io.github.kinderhead.T2L.tvm.Main.execute(Main.compile(String.join("\n", Files.readAllLines(Paths.get(getClass().getResource("/test.t2l").toURI()))), "out.t2lc"));
     }

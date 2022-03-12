@@ -38,9 +38,7 @@ import java.util.List;
  * The bytecode reader.
  */
 public class Reader {
-    public static Reader INSTANCE;
-
-    private ArrayList<Byte> CODE;
+    private final ArrayList<Byte> CODE;
     private int INDEX = 0;
     private int NEXT_NUMBER = 0;
 
@@ -50,7 +48,7 @@ public class Reader {
     /**
      * All instructions must be registered here.
      */
-    public ArrayList<Class<Instruction>> INSNS = new ArrayList(Arrays.asList(
+    public List<Class<? extends Instruction>> INSNS = Arrays.asList(
             ValueInsn.class,
             CallInsn.class,
             PushInsn.class,
@@ -68,13 +66,14 @@ public class Reader {
             ElseIfInsn.class,
             DictionaryInsn.class,
             PropertyInsn.class
-    ));
+    );
 
     /**
      * Creates the reader.
      *
      * @param code The code
      */
+    @SuppressWarnings("unchecked")
     public Reader(ArrayList<Byte> code) {
         byte[] objarr = ArrayUtils.toPrimitive(code.toArray(new Byte[0]));
 
@@ -123,7 +122,7 @@ public class Reader {
 
         for (OpCodes i: OpCodes.values()) {
             if (i.BYTE == opcode) {
-                for (Class<Instruction> clazz: INSNS) {
+                for (Class<? extends Instruction> clazz: INSNS) {
                     try {
                         insn = clazz.getDeclaredConstructor().newInstance();
                         if (insn.getOpcode() == i) {
@@ -223,7 +222,7 @@ public class Reader {
      * Stops after a <code>0xFF</code> byte.
      *
      * @return The instructions
-     * @see io.github.kinderhead.T2L.tvm.Builder#emitStatementArray(List)
+     * @see io.github.kinderhead.T2L.tvm.Builder#emitASTArray(List)
      */
     public ArrayList<Instruction> getInsns() {
         ArrayList<Instruction> insns = new ArrayList<>();
