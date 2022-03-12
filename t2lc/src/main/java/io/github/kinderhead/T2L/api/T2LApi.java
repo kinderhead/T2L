@@ -6,18 +6,16 @@ import io.github.kinderhead.T2L.execution.JavaInterface;
 import io.github.kinderhead.T2L.execution.Reader;
 import io.github.kinderhead.T2L.execution.T2LError;
 import io.github.kinderhead.T2L.execution.T2LObject;
-import io.github.kinderhead.T2L.execution.T2LTypes;
 import io.github.kinderhead.T2L.tvm.Instruction;
 import io.github.kinderhead.T2L.tvm.Main;
 
 import java.io.File;
-import java.lang.reflect.Array;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.security.Permission;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Public API for T2L
@@ -93,6 +91,12 @@ public class T2LApi {
                 jurls.toArray(new URL[0]),
                 jurls.getClass().getClassLoader()
         );
+        
+        try {
+            child.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

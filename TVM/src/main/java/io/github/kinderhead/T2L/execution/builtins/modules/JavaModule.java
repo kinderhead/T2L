@@ -108,12 +108,13 @@ public class JavaModule extends T2LModule {
      */
     @T2LFunction
     @T2LAsObject
-    public Object asArray(Executor executor, T2LObject obj, Class cls) {
+    @SuppressWarnings("unchecked")
+    public Object asArray(Executor executor, T2LObject obj, Class<?> cls) {
         if (!cls.isArray()) {
             cls = cls.arrayType();
         }
 
-        return JavaInterface.ifArrayChangeType(cls, obj.getIterable(executor).toArray(), executor);
+        return JavaInterface.ifArrayChangeType((Class<? extends Object[]>)cls, obj.getIterable(executor).toArray(), executor);
     }
 
     /**

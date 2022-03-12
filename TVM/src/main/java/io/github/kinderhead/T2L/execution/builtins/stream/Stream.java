@@ -10,4 +10,12 @@ public class Stream extends T2LObject {
     public Stream() {
         stream = System.out;
     }
+
+    public void println(String txt) {
+        stream.println(txt);
+    }
+
+    public void print(String txt) {
+        stream.print(txt);
+    }
 }

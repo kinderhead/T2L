@@ -29,15 +29,15 @@ public class IfInsn extends Instruction {
 
     @Override
     public void serialize(Builder builder) {
-        builder.emitStatementArray(BODY);
+        builder.emitASTArray(BODY);
         builder.emit(ELSE != null);
         if (ELSE != null) {
-            builder.emitStatementArray(ELSE);
+            builder.emitASTArray(ELSE);
         }
 
         builder.emit(ELSEIF != null);
         if (ELSEIF != null) {
-            builder.emitStatementArray(((ArrayList<Statement>)(ArrayList<?>) ELSEIF));
+            builder.emitASTArray(ELSEIF);
         }
     }
 

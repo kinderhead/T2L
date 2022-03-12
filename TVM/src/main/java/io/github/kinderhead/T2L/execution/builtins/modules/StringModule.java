@@ -21,6 +21,6 @@ public class StringModule extends T2LModule {
         T2LErrorUtils.assertString(str, executor);
         T2LErrorUtils.assertString(regex, executor);
 
-        return T2LObjectFactory.arrayToList(new ArrayList(Arrays.asList(str.STRING.split(regex.STRING))), String.class);
+        return T2LObjectFactory.arrayToList(new ArrayList<String>(Arrays.asList(str.STRING.split(regex.STRING))), String.class);
     }
 }

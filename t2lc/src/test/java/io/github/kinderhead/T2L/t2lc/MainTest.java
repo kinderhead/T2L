@@ -1,16 +1,12 @@
 package io.github.kinderhead.T2L.t2lc;
 
 import io.github.kinderhead.T2L.api.T2LApi;
-import io.github.kinderhead.T2L.tvm.Main;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.security.Permission;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 class MainTest {

@@ -26,8 +26,8 @@ public class ElseIfInsn extends Instruction {
 
     @Override
     public void serialize(Builder builder) {
-        builder.emitStatementArray(BODY);
-        builder.emitStatementArray(((ArrayList<Statement>)(ArrayList<?>) new ArrayList<>(Collections.singletonList(EXPR))));
+        builder.emitASTArray(BODY);
+        builder.emitASTArray(new ArrayList<IVisitorAST>(Collections.singletonList(EXPR)));
     }
 
     @Override

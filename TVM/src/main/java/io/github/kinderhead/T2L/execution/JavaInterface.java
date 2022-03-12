@@ -133,7 +133,7 @@ public class JavaInterface extends T2LObject {
      * @param executor Executor
      * @return The object
      */
-    public static Object getSupposedValue(T2LObject obj, Class cls, Executor executor) {
+    public static Object getSupposedValue(T2LObject obj, Class<?> cls, Executor executor) {
         if (obj == null) {
             return null;
         }
@@ -246,7 +246,7 @@ public class JavaInterface extends T2LObject {
      * @param executor Executor
      * @return The finished object
      */
-    public static Object ifArrayChangeType(Class cls, Object obj, Executor executor) {
+    public static Object ifArrayChangeType(Class<? extends Object[]> cls, Object obj, Executor executor) {
         if (!cls.isArray()) {
             return obj;
         }
@@ -319,6 +319,7 @@ public class JavaInterface extends T2LObject {
      * @return The return value. Returns a null T2LObject otherwise
      */
     @Override
+    @SuppressWarnings("unchecked")
     public T2LObject run(T2LObject obj, List<T2LObject> params, Executor executor) {
         if (VALUE instanceof Method) {
             Method[] methods;
@@ -338,7 +339,7 @@ public class JavaInterface extends T2LObject {
             try {
                 for (Method method : methods) {
                     try {
-                        Class[] method_params = method.getParameterTypes();
+                        Class<?>[] method_params = method.getParameterTypes();
                         boolean annotation = method.isAnnotationPresent(T2LFunction.class);
                         boolean isAsObject = method.isAnnotationPresent(T2LAsObject.class);
                         ArrayList<Object> param = new ArrayList<>();
@@ -352,7 +353,7 @@ public class JavaInterface extends T2LObject {
 
                         boolean isExtra = false;
                         for (T2LObject i : params) {
-                            Class cls;
+                            Class<?> cls;
                             if (ArrayUtils.isArrayIndexValid(method_params, offset)) {
                                 cls = method_params[offset];
                             } else {
@@ -367,7 +368,7 @@ public class JavaInterface extends T2LObject {
                                 if (isAsObject && method_params[offset].isAssignableFrom(T2LObject.class)) {
                                     param.add(i);
                                 } else {
-                                    param.add(ifArrayChangeType(method_params[offset], getSupposedValue(i, cls, executor), executor));
+                                    param.add(ifArrayChangeType((Class<? extends Object[]>)method_params[offset], getSupposedValue(i, cls, executor), executor));
                                 }
                             } else {
                                 extraParams.add(i);
@@ -424,6 +425,7 @@ public class JavaInterface extends T2LObject {
      * @return A list of objects
      */
     @Override
+    @SuppressWarnings("unchecked")
     public List<T2LObject> getIterable(Executor executor) {
         if (Arrays.stream(VALUE.getClass().getMethods()).anyMatch(f -> f.getName().equals("iter"))) {
             Method method = getMethod("iter");

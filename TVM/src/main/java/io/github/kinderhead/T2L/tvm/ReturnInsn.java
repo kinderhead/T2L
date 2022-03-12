@@ -1,6 +1,5 @@
 package io.github.kinderhead.T2L.tvm;
 
-import io.github.kinderhead.T2L.ast.IVisitorAST;
 import io.github.kinderhead.T2L.execution.Executor;
 import io.github.kinderhead.T2L.execution.Reader;
 

@@ -27,7 +27,7 @@ public class FuncInsn extends Instruction {
     public void serialize(Builder builder) {
         builder.emit(NAME);
         builder.emitStringArray(PARAMS);
-        builder.emitStatementArray(BODY);
+        builder.emitASTArray(BODY);
     }
 
     @Override

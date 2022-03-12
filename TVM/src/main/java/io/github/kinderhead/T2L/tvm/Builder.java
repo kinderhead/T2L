@@ -1,7 +1,6 @@
 package io.github.kinderhead.T2L.tvm;
 
 import io.github.kinderhead.T2L.ast.IVisitorAST;
-import io.github.kinderhead.T2L.ast.Statement;
 import io.github.kinderhead.T2L.execution.Reader;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -103,7 +102,7 @@ public class Builder {
      * @param objs The statements
      * @see Reader#getInsns()
      */
-    public void emitStatementArray(List<Statement> objs) {
+    public void emitASTArray(List<? extends IVisitorAST> objs) {
         for (IVisitorAST i : objs) {
             i.compile(this);
         }
@@ -135,7 +134,7 @@ public class Builder {
             out.writeObject(LINES);
             out.flush();
 
-            ArrayList newCode = new ArrayList<>(Arrays.asList(ArrayUtils.toObject(bos.toByteArray())));
+            ArrayList<Byte> newCode = new ArrayList<>(Arrays.asList(ArrayUtils.toObject(bos.toByteArray())));
             newCode.addAll(CODE);
             CODE = newCode;
         } catch (IOException e) {

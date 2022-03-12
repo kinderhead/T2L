@@ -27,7 +27,7 @@ public class ClassInsn extends Instruction {
     public void serialize(Builder builder) {
         builder.emit(NAME);
         builder.emitStringArray(INHERITANCE);
-        builder.emitStatementArray(BODY);
+        builder.emitASTArray(BODY);
     }
 
     @Override
