@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from t2l.g4 by ANTLR 4.10.1
+// Generated from ../t2l.g4 by ANTLR 4.10.1
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,7 +19,7 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
-namespace T2L.Antlr {
+namespace T2Lc.Antlr {
 using System;
 using System.IO;
 using System.Text;

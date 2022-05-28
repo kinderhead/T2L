@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from t2l.g4 by ANTLR 4.10.1
+// Generated from ../t2l.g4 by ANTLR 4.10.1
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,481 +19,383 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
-namespace T2L.Antlr {
-
+namespace T2Lc.Antlr {
 using Antlr4.Runtime.Misc;
-using IErrorNode = Antlr4.Runtime.Tree.IErrorNode;
-using ITerminalNode = Antlr4.Runtime.Tree.ITerminalNode;
+using IParseTreeListener = Antlr4.Runtime.Tree.IParseTreeListener;
 using IToken = Antlr4.Runtime.IToken;
-using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 
 /// <summary>
-/// This class provides an empty implementation of <see cref="It2lListener"/>,
-/// which can be extended to create a listener which only needs to handle a subset
-/// of the available methods.
+/// This interface defines a complete listener for a parse tree produced by
+/// <see cref="t2lParser"/>.
 /// </summary>
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.10.1")]
-[System.Diagnostics.DebuggerNonUserCode]
 [System.CLSCompliant(false)]
-public partial class t2lBaseListener : It2lListener {
+public interface It2lListener : IParseTreeListener {
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.start"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterStart([NotNull] t2lParser.StartContext context) { }
+	void EnterStart([NotNull] t2lParser.StartContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.start"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitStart([NotNull] t2lParser.StartContext context) { }
+	void ExitStart([NotNull] t2lParser.StartContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.block"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterBlock([NotNull] t2lParser.BlockContext context) { }
+	void EnterBlock([NotNull] t2lParser.BlockContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.block"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitBlock([NotNull] t2lParser.BlockContext context) { }
+	void ExitBlock([NotNull] t2lParser.BlockContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterStat([NotNull] t2lParser.StatContext context) { }
+	void EnterStat([NotNull] t2lParser.StatContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitStat([NotNull] t2lParser.StatContext context) { }
+	void ExitStat([NotNull] t2lParser.StatContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.class_stat_block"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterClass_stat_block([NotNull] t2lParser.Class_stat_blockContext context) { }
+	void EnterClass_stat_block([NotNull] t2lParser.Class_stat_blockContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.class_stat_block"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitClass_stat_block([NotNull] t2lParser.Class_stat_blockContext context) { }
+	void ExitClass_stat_block([NotNull] t2lParser.Class_stat_blockContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.call_stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterCall_stat([NotNull] t2lParser.Call_statContext context) { }
+	void EnterCall_stat([NotNull] t2lParser.Call_statContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.call_stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitCall_stat([NotNull] t2lParser.Call_statContext context) { }
+	void ExitCall_stat([NotNull] t2lParser.Call_statContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.func_stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterFunc_stat([NotNull] t2lParser.Func_statContext context) { }
+	void EnterFunc_stat([NotNull] t2lParser.Func_statContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.func_stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitFunc_stat([NotNull] t2lParser.Func_statContext context) { }
+	void ExitFunc_stat([NotNull] t2lParser.Func_statContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.t2l_return"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterT2l_return([NotNull] t2lParser.T2l_returnContext context) { }
+	void EnterT2l_return([NotNull] t2lParser.T2l_returnContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.t2l_return"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitT2l_return([NotNull] t2lParser.T2l_returnContext context) { }
+	void ExitT2l_return([NotNull] t2lParser.T2l_returnContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.class_stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterClass_stat([NotNull] t2lParser.Class_statContext context) { }
+	void EnterClass_stat([NotNull] t2lParser.Class_statContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.class_stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitClass_stat([NotNull] t2lParser.Class_statContext context) { }
+	void ExitClass_stat([NotNull] t2lParser.Class_statContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.params"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterParams([NotNull] t2lParser.ParamsContext context) { }
+	void EnterParams([NotNull] t2lParser.ParamsContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.params"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitParams([NotNull] t2lParser.ParamsContext context) { }
+	void ExitParams([NotNull] t2lParser.ParamsContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.def_params"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterDef_params([NotNull] t2lParser.Def_paramsContext context) { }
+	void EnterDef_params([NotNull] t2lParser.Def_paramsContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.def_params"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitDef_params([NotNull] t2lParser.Def_paramsContext context) { }
+	void ExitDef_params([NotNull] t2lParser.Def_paramsContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.var"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterVar([NotNull] t2lParser.VarContext context) { }
+	void EnterVar([NotNull] t2lParser.VarContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.var"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitVar([NotNull] t2lParser.VarContext context) { }
+	void ExitVar([NotNull] t2lParser.VarContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.index"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterIndex([NotNull] t2lParser.IndexContext context) { }
+	void EnterIndex([NotNull] t2lParser.IndexContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.index"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitIndex([NotNull] t2lParser.IndexContext context) { }
+	void ExitIndex([NotNull] t2lParser.IndexContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.import_stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterImport_stat([NotNull] t2lParser.Import_statContext context) { }
+	void EnterImport_stat([NotNull] t2lParser.Import_statContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.import_stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitImport_stat([NotNull] t2lParser.Import_statContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="t2lParser.jimport_stat"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterJimport_stat([NotNull] t2lParser.Jimport_statContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="t2lParser.jimport_stat"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitJimport_stat([NotNull] t2lParser.Jimport_statContext context) { }
+	void ExitImport_stat([NotNull] t2lParser.Import_statContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.if_stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterIf_stat([NotNull] t2lParser.If_statContext context) { }
+	void EnterIf_stat([NotNull] t2lParser.If_statContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.if_stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitIf_stat([NotNull] t2lParser.If_statContext context) { }
+	void ExitIf_stat([NotNull] t2lParser.If_statContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.elseIfStat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterElseIfStat([NotNull] t2lParser.ElseIfStatContext context) { }
+	void EnterElseIfStat([NotNull] t2lParser.ElseIfStatContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.elseIfStat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitElseIfStat([NotNull] t2lParser.ElseIfStatContext context) { }
+	void ExitElseIfStat([NotNull] t2lParser.ElseIfStatContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.elseStat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterElseStat([NotNull] t2lParser.ElseStatContext context) { }
+	void EnterElseStat([NotNull] t2lParser.ElseStatContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.elseStat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitElseStat([NotNull] t2lParser.ElseStatContext context) { }
+	void ExitElseStat([NotNull] t2lParser.ElseStatContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.cond"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterCond([NotNull] t2lParser.CondContext context) { }
+	void EnterCond([NotNull] t2lParser.CondContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.cond"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitCond([NotNull] t2lParser.CondContext context) { }
+	void ExitCond([NotNull] t2lParser.CondContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.stat_block"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterStat_block([NotNull] t2lParser.Stat_blockContext context) { }
+	void EnterStat_block([NotNull] t2lParser.Stat_blockContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.stat_block"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitStat_block([NotNull] t2lParser.Stat_blockContext context) { }
+	void ExitStat_block([NotNull] t2lParser.Stat_blockContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.while_stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterWhile_stat([NotNull] t2lParser.While_statContext context) { }
+	void EnterWhile_stat([NotNull] t2lParser.While_statContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.while_stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitWhile_stat([NotNull] t2lParser.While_statContext context) { }
+	void ExitWhile_stat([NotNull] t2lParser.While_statContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.for_loop_stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterFor_loop_stat([NotNull] t2lParser.For_loop_statContext context) { }
+	void EnterFor_loop_stat([NotNull] t2lParser.For_loop_statContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.for_loop_stat"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitFor_loop_stat([NotNull] t2lParser.For_loop_statContext context) { }
+	void ExitFor_loop_stat([NotNull] t2lParser.For_loop_statContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>DictionaryOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterDictionaryOp([NotNull] t2lParser.DictionaryOpContext context) { }
+	void EnterDictionaryOp([NotNull] t2lParser.DictionaryOpContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>DictionaryOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitDictionaryOp([NotNull] t2lParser.DictionaryOpContext context) { }
+	void ExitDictionaryOp([NotNull] t2lParser.DictionaryOpContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>ClassOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterClassOp([NotNull] t2lParser.ClassOpContext context) { }
+	void EnterClassOp([NotNull] t2lParser.ClassOpContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>ClassOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitClassOp([NotNull] t2lParser.ClassOpContext context) { }
+	void ExitClassOp([NotNull] t2lParser.ClassOpContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>ListOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterListOp([NotNull] t2lParser.ListOpContext context) { }
+	void EnterListOp([NotNull] t2lParser.ListOpContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>ListOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitListOp([NotNull] t2lParser.ListOpContext context) { }
+	void ExitListOp([NotNull] t2lParser.ListOpContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>FuncOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterFuncOp([NotNull] t2lParser.FuncOpContext context) { }
+	void EnterFuncOp([NotNull] t2lParser.FuncOpContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>FuncOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitFuncOp([NotNull] t2lParser.FuncOpContext context) { }
+	void ExitFuncOp([NotNull] t2lParser.FuncOpContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>AtomOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterAtomOp([NotNull] t2lParser.AtomOpContext context) { }
+	void EnterAtomOp([NotNull] t2lParser.AtomOpContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>AtomOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitAtomOp([NotNull] t2lParser.AtomOpContext context) { }
+	void ExitAtomOp([NotNull] t2lParser.AtomOpContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>MultiOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterMultiOp([NotNull] t2lParser.MultiOpContext context) { }
+	void EnterMultiOp([NotNull] t2lParser.MultiOpContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>MultiOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitMultiOp([NotNull] t2lParser.MultiOpContext context) { }
+	void ExitMultiOp([NotNull] t2lParser.MultiOpContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>ExprOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterExprOp([NotNull] t2lParser.ExprOpContext context) { }
+	void EnterExprOp([NotNull] t2lParser.ExprOpContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>ExprOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitExprOp([NotNull] t2lParser.ExprOpContext context) { }
+	void ExitExprOp([NotNull] t2lParser.ExprOpContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>SingleOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterSingleOp([NotNull] t2lParser.SingleOpContext context) { }
+	void EnterSingleOp([NotNull] t2lParser.SingleOpContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>SingleOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitSingleOp([NotNull] t2lParser.SingleOpContext context) { }
+	void ExitSingleOp([NotNull] t2lParser.SingleOpContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>IndexOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterIndexOp([NotNull] t2lParser.IndexOpContext context) { }
+	void EnterIndexOp([NotNull] t2lParser.IndexOpContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>IndexOp</c>
 	/// labeled alternative in <see cref="t2lParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitIndexOp([NotNull] t2lParser.IndexOpContext context) { }
+	void ExitIndexOp([NotNull] t2lParser.IndexOpContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="t2lParser.pair"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterPair([NotNull] t2lParser.PairContext context) { }
+	void EnterPair([NotNull] t2lParser.PairContext context);
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="t2lParser.pair"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitPair([NotNull] t2lParser.PairContext context) { }
+	void ExitPair([NotNull] t2lParser.PairContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>ParenAtom</c>
 	/// labeled alternative in <see cref="t2lParser.atom"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterParenAtom([NotNull] t2lParser.ParenAtomContext context) { }
+	void EnterParenAtom([NotNull] t2lParser.ParenAtomContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>ParenAtom</c>
 	/// labeled alternative in <see cref="t2lParser.atom"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitParenAtom([NotNull] t2lParser.ParenAtomContext context) { }
+	void ExitParenAtom([NotNull] t2lParser.ParenAtomContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>IntAtom</c>
 	/// labeled alternative in <see cref="t2lParser.atom"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterIntAtom([NotNull] t2lParser.IntAtomContext context) { }
+	void EnterIntAtom([NotNull] t2lParser.IntAtomContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>IntAtom</c>
 	/// labeled alternative in <see cref="t2lParser.atom"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitIntAtom([NotNull] t2lParser.IntAtomContext context) { }
+	void ExitIntAtom([NotNull] t2lParser.IntAtomContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>IDAtom</c>
 	/// labeled alternative in <see cref="t2lParser.atom"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterIDAtom([NotNull] t2lParser.IDAtomContext context) { }
+	void EnterIDAtom([NotNull] t2lParser.IDAtomContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>IDAtom</c>
 	/// labeled alternative in <see cref="t2lParser.atom"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitIDAtom([NotNull] t2lParser.IDAtomContext context) { }
+	void ExitIDAtom([NotNull] t2lParser.IDAtomContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>StringAtom</c>
 	/// labeled alternative in <see cref="t2lParser.atom"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterStringAtom([NotNull] t2lParser.StringAtomContext context) { }
+	void EnterStringAtom([NotNull] t2lParser.StringAtomContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>StringAtom</c>
 	/// labeled alternative in <see cref="t2lParser.atom"/>.
-	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitStringAtom([NotNull] t2lParser.StringAtomContext context) { }
-
-	/// <inheritdoc/>
-	/// <remarks>The default implementation does nothing.</remarks>
-	public virtual void EnterEveryRule([NotNull] ParserRuleContext context) { }
-	/// <inheritdoc/>
-	/// <remarks>The default implementation does nothing.</remarks>
-	public virtual void ExitEveryRule([NotNull] ParserRuleContext context) { }
-	/// <inheritdoc/>
-	/// <remarks>The default implementation does nothing.</remarks>
-	public virtual void VisitTerminal([NotNull] ITerminalNode node) { }
-	/// <inheritdoc/>
-	/// <remarks>The default implementation does nothing.</remarks>
-	public virtual void VisitErrorNode([NotNull] IErrorNode node) { }
+	void ExitStringAtom([NotNull] t2lParser.StringAtomContext context);
 }
 } // namespace T2L.Antlr

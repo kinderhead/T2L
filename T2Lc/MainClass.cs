@@ -1,4 +1,4 @@
-﻿namespace T2L
+﻿namespace T2Lc
 {
     public class MainClass
     {

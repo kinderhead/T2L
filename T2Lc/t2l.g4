@@ -15,7 +15,6 @@ stat
     | index
     | for_loop_stat
     | import_stat
-    | jimport_stat
     ;
 
 class_stat_block
@@ -29,7 +28,7 @@ call_stat
     ;
 
 func_stat
-    : (DOC)? FUNC ID def_params stat_block
+    : (DOC)? FUNC ID OPAR def_params CPAR stat_block
     ;
 
 t2l_return
@@ -45,7 +44,7 @@ params
     ;
 
 def_params
-    : ((STRING COMMA)* STRING)?
+    : ((ID COMMA)* ID)?
     ;
 
 var
@@ -59,10 +58,6 @@ index
 
 import_stat
     : IMPORT ID SCOL
-    ;
-
-jimport_stat
-    : JIMPORT ID SCOL
     ;
 
 if_stat
