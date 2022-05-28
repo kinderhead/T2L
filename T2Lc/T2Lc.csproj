@@ -15,4 +15,8 @@
     <Folder Include="Antlr\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\T2L\T2L.csproj" />
+  </ItemGroup>
+
 </Project>

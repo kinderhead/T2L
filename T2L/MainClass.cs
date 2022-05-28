@@ -1,12 +1,10 @@
-﻿using T2L.Mixins;
-
-namespace T2Lc
+﻿namespace T2L
 {
     public class MainClass
     {
         static void Main(string[] args)
         {
-
+            Console.WriteLine("Hello, World!");
         }
     }
 }
