@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\antlr4">
+      <UniqueIdentifier>{909cabf7-f46d-4844-8b64-a9042dd71b19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\antlr4">
+      <UniqueIdentifier>{528c6acb-319c-4354-9f3f-6ee37ac9ae90}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Compiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="antlr4\t2lBaseListener.cpp">
+      <Filter>Source Files\antlr4</Filter>
+    </ClCompile>
+    <ClCompile Include="antlr4\t2lBaseVisitor.cpp">
+      <Filter>Source Files\antlr4</Filter>
+    </ClCompile>
+    <ClCompile Include="antlr4\t2lLexer.cpp">
+      <Filter>Source Files\antlr4</Filter>
+    </ClCompile>
+    <ClCompile Include="antlr4\t2lListener.cpp">
+      <Filter>Source Files\antlr4</Filter>
+    </ClCompile>
+    <ClCompile Include="antlr4\t2lParser.cpp">
+      <Filter>Source Files\antlr4</Filter>
+    </ClCompile>
+    <ClCompile Include="antlr4\t2lVisitor.cpp">
+      <Filter>Source Files\antlr4</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="t2l.g4">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="t2lLexer.tokens">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="t2l.interp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="t2l.tokens">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="t2lLexer.interp">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Visitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Compiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="antlr4\t2lBaseListener.h">
+      <Filter>Header Files\antlr4</Filter>
+    </ClInclude>
+    <ClInclude Include="antlr4\t2lBaseVisitor.h">
+      <Filter>Header Files\antlr4</Filter>
+    </ClInclude>
+    <ClInclude Include="antlr4\t2lLexer.h">
+      <Filter>Header Files\antlr4</Filter>
+    </ClInclude>
+    <ClInclude Include="antlr4\t2lListener.h">
+      <Filter>Header Files\antlr4</Filter>
+    </ClInclude>
+    <ClInclude Include="antlr4\t2lParser.h">
+      <Filter>Header Files\antlr4</Filter>
+    </ClInclude>
+    <ClInclude Include="antlr4\t2lVisitor.h">
+      <Filter>Header Files\antlr4</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
