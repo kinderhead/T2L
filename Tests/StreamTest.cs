@@ -26,5 +26,27 @@ namespace Tests
 
             Assert.AreEqual(stream.ReadString(), "Hello world!");
         }
+
+        [TestMethod]
+        public void RWBoolTrue()
+        {
+            Stream stream = new MemoryStream();
+            stream.WriteBool(true);
+
+            stream.Seek(0, SeekOrigin.Begin);
+
+            Assert.IsTrue(stream.ReadBool());
+        }
+
+        [TestMethod]
+        public void RWBoolFalse()
+        {
+            Stream stream = new MemoryStream();
+            stream.WriteBool(false);
+
+            stream.Seek(0, SeekOrigin.Begin);
+
+            Assert.IsFalse(stream.ReadBool());
+        }
     }
 }

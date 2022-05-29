@@ -6,7 +6,7 @@ namespace T2Lc
     {
         static void Main(string[] args)
         {
-
+            Compiler compiler = new("test = 4;");
         }
     }
 }

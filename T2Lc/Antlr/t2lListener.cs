@@ -398,4 +398,4 @@ public interface It2lListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitStringAtom([NotNull] t2lParser.StringAtomContext context);
 }
-} // namespace T2L.Antlr
+} // namespace T2Lc.Antlr

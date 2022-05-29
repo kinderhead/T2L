@@ -223,4 +223,4 @@ public partial class t2lLexer : Lexer {
 
 
 }
-} // namespace T2L.Antlr
+} // namespace T2Lc.Antlr

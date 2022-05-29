@@ -8,7 +8,14 @@ namespace T2L.Opcodes
 {
     public class IRValue : IR
     {
+        public bool IsNone;
+
         public override IRType Type { get => IRType.VALUE; }
+
+        public IRValue()
+        {
+            IsNone = true;
+        }
 
         public override void Deserialize(Stream stream)
         {
@@ -17,7 +24,7 @@ namespace T2L.Opcodes
 
         public override void Serialize(Stream stream)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

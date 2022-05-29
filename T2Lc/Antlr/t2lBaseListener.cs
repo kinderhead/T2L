@@ -484,4 +484,4 @@ public partial class t2lBaseListener : It2lListener {
 	/// <remarks>The default implementation does nothing.</remarks>
 	public virtual void VisitErrorNode([NotNull] IErrorNode node) { }
 }
-} // namespace T2L.Antlr
+} // namespace T2Lc.Antlr

@@ -46,5 +46,17 @@ namespace T2L.Mixins
             stream.Read(buf, 0, len);
             return Encoding.Unicode.GetString(buf);
         }
+
+        public static void WriteBool(this Stream stream, bool b)
+        {
+            stream.Write(BitConverter.GetBytes(b));
+        }
+
+        public static bool ReadBool(this Stream stream)
+        {
+            byte[] buf = new byte[1];
+            stream.Read(buf, 0, 1);
+            return BitConverter.ToBoolean(buf);
+        }
     }
 }

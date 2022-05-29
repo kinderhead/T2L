@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using T2L;
 using T2Lc.Antlr;
 
 namespace T2Lc
 {
     public class Compiler
     {
+        public List<IR> Code = new();
+
         public Compiler(string code)
         {
             ICharStream stream = CharStreams.fromString(code);
@@ -21,8 +24,8 @@ namespace T2Lc
             parser.BuildParseTree = true;
             IParseTree tree = parser.start();
 
-            Listener listener = new();
-            ParseTreeWalker.Default.Walk(listener, tree);
+            Visitor visitor = new(this);
+            visitor.Visit(tree);
         }
     }
 }

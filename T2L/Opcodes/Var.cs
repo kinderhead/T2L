@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using T2L.Mixins;
 
 namespace T2L.Opcodes
 {
@@ -23,12 +24,15 @@ namespace T2L.Opcodes
         
         public override void Deserialize(Stream stream)
         {
-            
+            name = stream.ReadString();
+            val = new IRValue();
+            val.Deserialize(stream);
         }
 
         public override void Serialize(Stream stream)
         {
-            throw new NotImplementedException();
+            stream.WriteString(name);
+            val.Serialize(stream);
         }
     }
 }
