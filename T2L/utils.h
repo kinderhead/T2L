@@ -8,7 +8,4 @@
 #include <iostream>
 #include <vector>
 
-#include <antlr4-runtime.h>
-
-using namespace antlr4;
 using namespace std;
