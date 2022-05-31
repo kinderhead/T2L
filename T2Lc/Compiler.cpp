@@ -1,14 +1,15 @@
 #include "Compiler.h"
 
+#include <sstream>
+
 #include "antlr4/t2lLexer.h"
 #include "antlr4/t2lParser.h"
 
 #include "Visitor.h"
 
-Compiler::Compiler(string filepath)
+Compiler::Compiler(string code)
 {
-	ifstream stream;
-	stream.open(filepath);
+	stringstream stream(code);
 
 	ANTLRInputStream input(stream);
 	t2lLexer lexer(&input);
@@ -18,6 +19,4 @@ Compiler::Compiler(string filepath)
 	tree::ParseTree* tree = parser.start();
 	Visitor visitor;
 	visitor.visit(tree);
-
-	stream.close();
 }
