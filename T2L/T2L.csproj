@@ -11,8 +11,4 @@
     <PackageReference Include="sly" Version="2.9.0.4" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Parser\" />
-  </ItemGroup>
-
 </Project>
