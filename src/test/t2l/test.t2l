@@ -1,9 +1,0 @@
-"""Prints the argument.
-Does nothing else.
-
-Parameters
-----------
-arg, object: The argument"""
-func test "arg" {
-    print(arg);
-}

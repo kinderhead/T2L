@@ -13,3 +13,9 @@ bin/
 *.t2lc
 *.t2lm
 *.t2ll
+
+# C#
+.vs/
+build/
+bin/
+obj/
